@@ -1,0 +1,10 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main(){
+    vector<string> v;
+    
+    return 0;
+}
