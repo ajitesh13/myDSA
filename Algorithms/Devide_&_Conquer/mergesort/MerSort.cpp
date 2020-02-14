@@ -2,7 +2,6 @@
 using namespace std;
 
 void Merge(int ar[], int p, int q, int r){
-    // int i=0, j=0, k=0;
     int n1 = q-p+1;
     int n2 = r-q;
     int Temp1[n1]={0};
@@ -27,12 +26,12 @@ void Merge(int ar[], int p, int q, int r){
         }
         k++;
     }
-    while(i<=n1){
+    while(i < n1){
         ar[k] = Temp1[i];
         i++;
         k++;
     }
-    while(j<=n2){
+    while(j < n2){
         ar[k] = Temp2[j];
         j++;
         k++;
@@ -42,7 +41,6 @@ void Merge(int ar[], int p, int q, int r){
 void MergeSort(int ar[], int p, int r){
     if(p < r){
         int q = p + (r-p)/2; // better than (p+r)/2
-        // cout << q << endl;
         MergeSort(ar,p,q);
         MergeSort(ar,q+1,r);
         Merge(ar,p,q,r);
