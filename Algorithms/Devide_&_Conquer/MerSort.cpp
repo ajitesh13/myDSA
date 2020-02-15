@@ -14,7 +14,7 @@ void Merge(int ar[], int p, int q, int r){
     }
     int i = 0;
     int j = 0;
-    int k = p;
+    int k = p; // important
 
     while(i<n1 && j<n2){
         if(Temp1[i] <= Temp2[j]){
