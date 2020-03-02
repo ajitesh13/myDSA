@@ -1,18 +1,19 @@
+// rotate the array d times 
+
 #include <iostream>
 using namespace std;
 
-void rotate(int ar[], int d, int n){
-    int temp = ar[0];
-    int new_ar[n];
+void rotate(int ar[], int n){
+    int p = ar[0];
     for(int i=0; i<n; i++){
-        new_ar[i] = ar[i+1];
+        ar[i] = ar[i+1];
     }
-    new_ar[n-1] = temp;
+    ar[n-1] = p;
 }
 
 void makerotation(int ar[], int d, int n){
-    for(int i=d; d>=1; d--){
-        rotate(ar, 1, n);
+    while(d--){
+        rotate(ar, n);
     }
 }
 
