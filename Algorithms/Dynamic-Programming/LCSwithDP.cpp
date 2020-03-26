@@ -1,4 +1,4 @@
-// debug it
+// debug it and add printing the subsequence part
 #include <bits/stdc++.h>
 using namespace std;
 
