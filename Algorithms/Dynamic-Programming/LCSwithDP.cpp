@@ -12,7 +12,7 @@ int lcs(string s1, string s2) {
             if(i==0 || j==0) {
                 c[i][j] = 0;
             } else if(s1[i-1] == s2[j-1]) {
-                    c[i][j] = 1 + c[i-1][j-1];
+                c[i][j] = 1 + c[i-1][j-1];
             } else {
                 c[i][j] = max(c[i-1][j], c[i][j-1]);
             }
