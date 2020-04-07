@@ -1,0 +1,24 @@
+Important STL Algorithms:
+
+https://www.geeksforgeeks.org/algorithms-library-c-stl/
+
+1. distance(first_iterator,desired_position) – It returns the distance of desired position from the first iterator.
+This function is very useful while finding the index.
+2. arr.erase(position to be deleted) – This erases selected element in vector and shifts and resizes the vector elements accordingly.
+3. arr.erase(unique(arr.begin(),arr.end()),arr.end()) – This erases the duplicate occurrences in sorted vector in a single line.
+4. accumulate(first_iterator, last_iterator, initial value of sum) – Does the summation of vector elements
+
+Important Array Algorithms:
+
+1. all_of() : operates on whole of array without running a loop
+all_of(ar, ar+6, [](int x) { return x>0; }) ? cout << "All are positive elements" : cout << "All are not positive elements";
+
+2. any_of() : Returns true if at least one element satisfies the property else returns false
+any_of(ar, ar+6, [](int x){ return x<0; }) ? cout << "There exists a negative element" : cout << "All are positive elements";
+
+3. none_of() : returns true if none of the element satisfy a given property
+4. copy_n() : copy element to a new array
+copy_n(ar, 6, ar1);
+
+Partition Algorithms: https://www.geeksforgeeks.org/stdpartition-in-c-stl/
+
