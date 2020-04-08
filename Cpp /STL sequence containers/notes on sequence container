@@ -50,6 +50,12 @@ iv) Multimap
 Impliment unordered DS that can be quickly searched
 
 i) unordered set
-* implimented using a hash table
+* implimented using a hash table, keys are hashed into indices of a hashed table
+* insertion is always randomised
+* practical operations take O(1) time and having worst case as O(n)
+
+ii) unordered Multiset
+iii) unordered map
+iv) unordered Multimap
 
 
