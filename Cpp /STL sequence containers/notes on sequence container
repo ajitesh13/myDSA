@@ -1,0 +1,55 @@
+1. Sequence Containers :-
+
+i) List (implimented using doubly linked list):-
+* Allow non-contiguous memory allocation
+* slow traversal
+* but once position is found, fast insertion, deletion
+
+ii) Deque
+* all functionalities of vectors plus features of push, pop at both the ends
+
+iii) Array
+* array class know its size, so we dont have to pass the size of array as a separate parameter to function
+* at(), get(), fill(), size(), front(), back()
+
+iv) Forward List(impliemnted using singly linked list) :-
+* Advantage over List is because, it only stores the address of next element, not previous element, so no unneccessaary memory consumption
+* Useful if only forward traversal is required.
+
+2. Container Adaptiors :-
+
+i) Queue
+* FIFO arrangement
+* inserted at the back and deleted from the front
+
+ii) Priority Queue
+* Create a max heap / mean heap automatically
+
+iii) Stack
+* LIFO workflow and do empty(), size(), top(), push(any), pop() in O(1)
+
+3. Associative Containers :-
+
+Impliment sorted DS that can be quizkly searched(O(log n))
+
+i) Set
+* Each element has to be unique
+* value of elements can't be modified once added to set, but modified value can be added or deleted
+
+ii) Multiset
+* Similar to set with difference that, multiple element can have same value
+
+iii) Map
+* Stores object in key value pair and the key part is always sorted
+
+iv) Multimap
+* Similar to maps, plus some some other benefits of having repetative pair.
+
+4. Unordered Associative Containers
+
+Impliment unordered DS that can be quickly searched
+
+i) unordered set
+* implimented using a hash table
+
+
