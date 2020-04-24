@@ -60,6 +60,12 @@ ii) *unordered Multiset*
 -> all operations take O(1) and in worst case can take O(n)
 
 iii) unordered map
-iv) unordered Multimap
+-> implimented using hash table
+-> search, insert, delete operation take O(1)
+-> The sequence of key value pair cant be predicted
+-> Duplicate key cant be predicted
 
+iv) unordered Multimap
+-> all properties of unordered map
+-> duplicate keys can be added
 
