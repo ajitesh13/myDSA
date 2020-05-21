@@ -1,2 +1,27 @@
 Concepts:
-1. A number can be doubled by appending a 0 at the end of it
+1. In binary form a number can be doubled by appending a 0 at the end of it.
+2. 2k+1 is obtained by appending 1 in the binary representation of k
+3. 2k is obtained by appending 0 in the binary representation of k
+4. a xor b = c, in this expression a and c had the same parity(even or odd no. of 1 in binary)
+5. x xor 1 = x with last bit changed 1001 xor 1 = 1000 10 xor 1 = 11
+
+Builtin Function of GCC compiler
+
+1. __builtin_popcount(n) : calculate the number of ones in binary representation of a given unsigned number
+   __builtin_popcountl(n) : for long integer
+   __builtin_popcountll(n) : for long long integer
+
+odd parity: If a number contains odd no. of one in binary
+even parity: if the number contains even no. of one in binary
+2. __builtin_parity(n) : return true if number has odd parity in binary
+return false if number has even parity in binary
+   __builtin_parityl(n): for long integer
+   __builtin_parityll(n): for long long integer
+
+3. __builtin_clz: It count the number of leading zero before the first occurance of one
+__builtin_clz(16) : 27
+__builtin_clzll(16) : 59
+
+4. __builtin_ctz: Count the number of trailing zeros, if any in binary
+__builtin_ctz(16) : 4
+__builtin_ctz(17) : 0
