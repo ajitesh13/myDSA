@@ -1,0 +1,72 @@
+Dealing with files in C++
+-------------------------
+In C++, we can open a file by linking it to a stream.
+Before opening a file, we must first obtain a stream.
+Basically, there are three types of stream input, output
+and input/ouput.
+
+Examples:
+------------
+
+ifstream in; // Creates an input stream
+
+ofstream out; // Creates an output stream
+
+fstream inout; // Creates both input and output stream
+
+Once we have created a stream, it can be associated with 
+a file by using open(). The open() function is a member of
+each of the above three stream classes.
+
+Prototype:
+----------
+
+void ifstream::open(const char *, 
+                    ios::openmode mode=ios::in);
+
+void ofstream::open(const char *, 
+               ios::openmode mode=ios::out|ios::trunc);
+
+void fstream::open(const char *, 
+               ios::openmode mode=ios::in|ios::out);
+
+Various modes:
+--------------
+
+ios::app - causes all output to that file to be appended 
+           to the end.
+
+ios::ate - causes a seek to the end of the file to occur 
+           when the file is opened.
+
+ios::in - specifies that the file is capable of input.
+
+ios::out - specifies that the file is capable of output.
+
+ios::binary - causes a file to be opened in binary mode.
+
+ios::trunc - causes the contents of a preexisting file 
+             by the same name to be destoyed,and the 
+			 file length is truncated to new length.
+
+Text files Vs. Binary files
+---------------------------
+
+Text files: By deafult a file is a text file.
+            Data are stored as characters.
+            Contains an end-of-line (\n) character 
+			and also an end-of-file character.
+			
+Example:  123 is stored as 1,      2      and 3. 
+                      |00000001|00000010|00000011|
+					  
+Binary files: All the data are stored in their internal 
+              computer format. To create a binary file 
+			  explicitely ios::binary must be used.
+              Contains an end-of-file character only. 
+			  No end-of-line (\n) character.
+			
+Example:  123 is stored as 123. 
+         |0000000000000000000000001111011| 
+		 (Assuming an int reserves 4 bytes)
+             			

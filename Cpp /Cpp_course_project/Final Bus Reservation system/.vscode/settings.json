@@ -1,0 +1,9 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "glassit.alpha": 230,
+    "explorer.decorations.colors": false,
+    "editor.hover.delay": 100,
+    "files.associations": {
+        "iostream": "cpp"
+    }
+}

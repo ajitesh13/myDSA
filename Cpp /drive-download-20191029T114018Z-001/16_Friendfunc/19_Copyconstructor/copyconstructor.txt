@@ -1,0 +1,32 @@
+Copy constructor
+----------------
+A constructor having a reference parameter of it's 
+class type as first argument is known as a copy 
+constructor.
+
+What does it do?
+----------------
+When an object is decalred for the very first time 
+and it gets initilaized with the help of another 
+object of it's own type, the copy constructor is 
+called to initialize this object.
+
+When a copy constructor is called?
+----------------------------------
+- When an object is passed as an argument to a 
+  function by value.
+- When an object is returned from a function 
+  by value.
+- When an object is thrown.
+- When an object is caught.
+
+Syntax
+------
+<class name>(<class name> &<var name>);
+<class name>(const <class name> &<var name>);
+A(A &copy);
+A(A copy);
+A(const A &copy);
+A(const A &copy, int x=0);
+
+

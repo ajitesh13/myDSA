@@ -1,0 +1,17 @@
+#include <iostream>
+using namepace std;
+
+class A{
+    private:
+        static int x;
+    public:
+        A(){
+            x++;
+            cout<<"There are "<<x<<" objects<<'\n';
+        }
+};
+
+int main(){
+    A ob1, ob2;
+    return 0;
+}

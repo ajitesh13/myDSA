@@ -1,0 +1,12 @@
+We can declare a member function as const.
+In such a case "this pointer" is treated as
+a const pointer. Hence, that function cannot
+modify the object that invokes it. Also, a const
+object may not invoke a non-const member function.
+However, a const member function can be called 
+by either const or non-const object.
+
+<ret-type> <class name>::<function name>(parameters) const
+{
+
+}
