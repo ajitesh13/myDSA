@@ -1,0 +1,17 @@
+Syntax :-
+
+upper_bound(f, l, val);
+upper_bound(f, l, val, comp);
+
+f: iterator to beginning of sequence
+l: iterator to end of sequence
+val: value whose upper bound needed to be found
+comp: -- not clear yet --
+
+What it returns ?
+
+It returns the iterator to the first element in the given range
+which is greater than val. If no such number exist returns iterator
+one past the last element(by doing it - a.begin())
+
+* upper_bound only works in sorted sequence

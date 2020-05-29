@@ -4,14 +4,25 @@
 #define endl "\n" 
 using namespace std;
 
+int upperbound(int ar[], int p, int r, int val) {
+    while (p <= r) {
+        int q = (p + r)/2;
+        if (a[q] > val) {
+
+        } else {
+
+        }
+    }
+}
+
 // int main() {
 signed main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
     
-    double k = 2;
-    cout << pow(2, k) << endl;
+    int ar[] = { 2, 4, 5, 5, 5, 7 };
+    cout << upperbund(ar, 0, 5, 5) << endl;
     
     return 0;
 }

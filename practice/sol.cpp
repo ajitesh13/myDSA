@@ -10,36 +10,23 @@ signed main() {
     cin.tie(0);
     cout.tie(0);
     
-    // int tc = 1;
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        int e = 2, sume = 0;
-        int o = 1, sumo = 0;
-        vector<int> v;
-        for (int i=1; i<=n/2; i++) {
-            v.push_back(e);
-            sume += e;
-            e += 2;
-        }
-        for (int i=(n/2+1); i<=n-1; i++) {
-            v.push_back(o);
-            sumo += o;
-            o += 2;
-        }
-        if ((sume - sumo) % 2 != 0) {
-            cout << "YES" << endl;
-            v.push_back(sume-sumo);
-            for (int i=0; i<n; i++) {
-                cout << v[i] << " ";
-            }
-            cout << endl;
-        } else {
-            cout << "NO" << endl;
-        }
+    int na, nb;
+    cin >> na >> nb;
+    vector<int> a(na);
+    vector<int> b(nb);
+    for (int i=0; i<na; i++) {
+        cin >> a[i];
     }
-    
+    for (int i=0; i<nb; i++) {
+        cin >> b[i];
+    }
+    int res = 0;
+    vector<int>::iterator it;
+    for (int i=0; i<nb; i++) {
+        it = upper_bound(a.begin(), a.end(), b[i]);
+        cout << (it - a.begin());
+    }
+    cout << endl;
+
     return 0;
 }
