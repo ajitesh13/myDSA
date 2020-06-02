@@ -10,23 +10,14 @@ signed main() {
     cin.tie(0);
     cout.tie(0);
     
-    int na, nb;
-    cin >> na >> nb;
-    vector<int> a(na);
-    vector<int> b(nb);
-    for (int i=0; i<na; i++) {
-        cin >> a[i];
+    // int tc = 1;
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+        
+        // cout << "Case #" << tc << ": " <<<< "\n"; tc++;
     }
-    for (int i=0; i<nb; i++) {
-        cin >> b[i];
-    }
-    int res = 0;
-    vector<int>::iterator it;
-    for (int i=0; i<nb; i++) {
-        it = upper_bound(a.begin(), a.end(), b[i]);
-        cout << (it - a.begin());
-    }
-    cout << endl;
-
+    
     return 0;
 }
