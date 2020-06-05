@@ -1,113 +1,84 @@
 // g++ -Wall -Wextra -pedantic -std=c++17 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector
 #include <bits/stdc++.h>
+#define int long long
 #define endl "\n"
 using namespace std;
-vector<int> res;
+const int N = 2e5+23;
+int a[N], b[N];
+vector<vector<pair<int,int>>> cycles;
+vector<pair<int,int>> swaps;
+vector<pair<pair<int,int>,int>> sol;
 
-int solve(vector<int> v) {
-    vector<int> temp = v;
-    sort(temp.begin(), temp.end());
-    vector<int> b;
-    for (unsigned i=0; i<v.size(); i++) {
-        if (temp[i] != v[i]) {
-            b.push_back(v[i]);
-        }
+void solve() {
+    int n, k, parity = 0;
+    cin >> n >> k;
+    for (int i=0; i<n; i++) {
+        cin >> a[i];
+        b[i] = a[i];
     }
-    int big = -1;
-    int index = 0;
-    for (unsigned i=0; i<b.size(); i++) {
-        if (b[i] > big ) {
-            big = b[i];
-            index = i;
+    vector<vector<pair<int,int>>> oddcycles;
+    for (int i=1; i<=n; i++) {
+        vector<pair<int,int>> v;
+        while (a[i] != i) {
+            v.push_back(make_pair(i, a[i]));
+            parity++;
+            swap(a[i], a[a[i]]);
         }
-    }
-    if (b.size() == 0) {
-        return(1);
-    } else if (b.size() < 3) {
-        return(0);
-    } else if (b.size() == 3) {
-        if (big != b[0]) {
-            sort(b.begin(), b.end());
-            for (unsigned i=0; i<b.size(); i++) {
-                res.push_back(b[i]);
+        if (v.size()) {
+            if (v.size() % 2 == 0) {
+                cycles.push_back(v);
+            } else {
+                oddcycles.push_back(v);
             }
-            return(1);
+        }
+    }
+    for (int i=0; i<oddcycles.size(); i++) {
+        cycles.push_back(oddcycles[i]);
+    }
+    if (parity % 2 == 1) {
+        cout << -1 << "\n";
+        return;
+    }
+    if (n == 3) {
+        if (b[1] == 1) {
+            cout << "0\n";
+        } else if (b[1] == 2) {
+            cout << "1\n";
+            cout << "1 2 3\n";
         } else {
-            int two = 2;
-            sort(b.begin(), b.end());
-            while (two--) {
-                for (unsigned i=0; i<b.size(); i++) {
-                    res.push_back(b[i]);
-                }
-            }
-            return(1);
+            cout << "1 \n";
+            cout << "1 3 2\n";
         }
-    } else {
-        if (big != b[0]) {
-            vector<int> c(b.size()-1);
-            for (unsigned i=0; i<(b.size()-1); i++) {
-                c[i] = b[i];
+        return;
+    }
+    for (auto f: cycles) {
+        for (auto g: f) {
+            if (g.first > g.second) {
+                swap(g.first, g.second);
             }
-            c[0] = b[b.size()-1];
-            c[index] = b[0];
-            vector<int> d;
-            d.push_back(b[0]);
-            d.push_back(b[b.size()-1]);
-            d.push_back(b[index]);
-            sort(d.begin(), d.end());
-            for(int i=0; i<d.size(); i++) {
-                res.push_back(d[i]);
-            }
-            solve(c);
-        } else {
-            vector<int> c(b.size()-1);
-            for (unsigned i=0; i<(b.size()-1); i++) {
-                c[i] = b[i];
-            }
-            c[0] = b[1];
-            c[1] = b[b.size()-1];
-            vector<int> d;
-            d.push_back(b[0]);
-            d.push_back(b[1]);
-            d.push_back(b[b.size()-1]);
-            sort(d.begin(), d.end());
-            int two = 2;
-            while (two--) {
-                for (int i=0; i<d.size(); i++) {
-                    res.push_back(d[i]);
-                }
-            }
-            solve(c);
+            swaps.push_back(g);
         }
     }
-    return -1;
+    for (int x=0; x < swaps.size(); x += 2) {
+        pair<int,int> f = swap[x], g = swaps[x+1];
+        
+    }
+
 }
 
-int main() {
+// int main() {
+signed main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-
-    int t=1;
-    // cin >> t;
+    
+    // int tc = 1;
+    int t;
+    cin >> t;
     while (t--) {
-        res.clear();
-        unsigned n, k;
-        cin >> n;
-        vector<int> v(n);
-        for (unsigned i=0; i<n; i++) {
-            cin >> v[i];
-        }
-        if (solve(v) == 0) {
-            cout << -1 << endl;
-        } else {
-            for (unsigned i=0; i<res.size(); i++) {
-                cout << res[i] << " ";
-                if (((i+1) % 3) == 0) {
-                    cout << endl;
-                }
-            }
-        }
+        solve();
+        
+        // cout << "Case #" << tc << ": " <<<< "\n"; tc++;
     }
     
     return 0;
