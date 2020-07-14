@@ -10,12 +10,38 @@ signed main() {
     cin.tie(0);
     cout.tie(0);
 
-    // int tc = 1;
-    int t;
-    cin >> t;
-    while (t--) {
-        
+    string pattern = "abba";
+    string str = "dog cat cat dog";
+    vector<string> s;
+    vector<string> p;
+    const char delims = ' ';
+    string hs;
+    stringstream sss(str);
+    for (int i=0; i<pattern.size(); i++) {
+        p.push_back(pattern[i]);
     }
-    
+    while (getline(sss, hs, delims)) {
+        s.push_back(hs);
+    }
+    int cntr = 0;
+    unordered_map<string,string> ums;
+    for (int i=0; i<p.size(); i++) {
+        if (ums.find(p[i]) == ums.end()) {
+            ums.insert(make_pair(p[i], s[i]));
+        } else {
+            if (ums.at(p[i]) == s[i]) {
+                ums.insert(make_pair(p[i], s[i]));
+            } else {
+                cntr++;
+                break;
+            }
+        }
+    }
+    if (cntr == 0) {
+        return true;
+    } else {
+        return false;
+    }
+
     return 0;
 }

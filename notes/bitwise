@@ -4,6 +4,7 @@ Concepts:
 3. 2k is obtained by appending 0 in the binary representation of k
 4. a xor b = c, in this expression a and c had the same parity(even or odd no. of 1 in binary)
 5. x xor 1 = x with last bit changed 1001 xor 1 = 1000 10 xor 1 = 11
+6. (any no.) xor 0 = (anu no.) and (any no.) xor (any no.) = 0
 
 Builtin Function of GCC compiler
 
