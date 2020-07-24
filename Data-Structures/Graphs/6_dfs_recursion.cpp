@@ -27,7 +27,7 @@ signed main() {
     for (int i=0; i<e; i++) {
         cin >> a >> b;
         adj[a-1].push_back(b);
-        adj[b-1].push_back(a);
+        // adj[b-1].push_back(a);
     }
     vector<bool> visited(n);
     int s = 1;
