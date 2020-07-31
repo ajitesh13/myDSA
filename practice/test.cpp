@@ -9,13 +9,34 @@ signed main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 	cout.tie(0);
-	
-	vector<int> a = { 1, 2, 3, 4, 5 };
-	if (find(a.begin(), a.end(), 5) != a.end()) {
-		cout << "PRESENT SIR" << endl;
-	} else {
-		cout << "NOT PRESENT SIR" << endl;
+
+	int N = 2;
+	vector<vector<int>> trust = {{1,2}};
+	int n = N;
+	int e = trust.size();
+	int a, b;
+	vector<vector<int>> adj(n);
+	for (auto i: trust) {
+		a = i[0];
+		b = i[1];
+		adj[b-1].push_back(a);
 	}
-	
+	// for (int i=0; i<n; i++) {
+	// 	cout << (i+1) << ": ";
+	// 	for (auto it=adj[i].begin(); it!=adj[i].end(); it++) {
+	// 		cout << *it << " ";
+	// 	}
+	// 	cout << endl;
+	// }
+	int res = -1;
+	for (int i=0; i<n; i++) {
+		int x = adj[i].size();
+		if (x > res) {
+			cout << "in" << endl;
+			res = adj[i].size();
+		}
+	}
+	cout << res << endl;
+
 	return 0;
 }
