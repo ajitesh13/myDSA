@@ -5,7 +5,8 @@
 if j = 6
 1<<j = 001000000
 if counter = 320 = 101000000
-counter&(1<<j) = 101000000 & 001000000 = 001000000
+counter&(1<<j) = 101000000 & 001000000 = 001000000 (only get the 1 in that perticular place in which both of
+them have got 1)
 
 This technique can help us to find if the jth element in counter is set or not(meaning it is 1 or not)
 We can also do this with bitmasking: 320&(1<<6) = 64
