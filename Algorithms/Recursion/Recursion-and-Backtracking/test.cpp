@@ -2,8 +2,9 @@
 using namespace std;
 
 int main() {
-    int k;
-    cin >> k;
-    cout << (k&1) << '\n';
-    cout << (k >> 1) << '\n';
+    for (int i=0; i<8; i++) {
+        if (__builtin_popcount(i) == 2) {
+            cout << i << '\n';
+        }
+    }
 }
