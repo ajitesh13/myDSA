@@ -6,28 +6,25 @@ class Node {
     int data;
     Node* link;
 };
+
 Node* start = NULL;
 
 void ab(int data) {
-    Node temp;
-    temp.data = data;
-    temp.link = NULL;
+    Node* temp = new Node;
+    temp->data = data;
+    temp->link = NULL;
     if (start == NULL) {
-        start = &temp;
-        cout << "YES" << " ";
-    } 
-    else {
-        Node* ptr;
-        ptr = start;
-        while (ptr != NULL) {
+        start = temp;
+    } else {
+        Node* ptr = start;
+        while (ptr->link != NULL) {
             ptr = ptr->link;
         }
-        ptr = &temp;
+        ptr->link = temp;
     }
-    cout << start->data << " "; // for printing the data of start
 }
 
-void gen(vector<int>& v) {
+void gen(vector<int> v) {
     for (int i=0; i<v.size(); i++) {
         ab(v[i]);
     }
@@ -38,8 +35,7 @@ void show() {
     while (ptr != NULL) {
         cout << ptr->data << " ";
         ptr = ptr->link;
-    } 
-    return;
+    }
 }
 
 int main() {
@@ -50,6 +46,7 @@ int main() {
         cin >> v[i];
     }
     gen(v);
-    // show();
+    show();
+    cout << '\n';
     return 0;
 }
