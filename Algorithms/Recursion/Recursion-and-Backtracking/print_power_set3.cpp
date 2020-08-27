@@ -2,10 +2,10 @@
 #include <bits/stdc++.h>
 #define ll long long int
 #define pb push_back
-#define make_pair mp
+#define mp make_pair
+#define pp pop_back
 using namespace std;
 const int MAX = 10e6;
-int res;
 
 double tick() {
     static clock_t oldt, newt = clock();
@@ -14,14 +14,24 @@ double tick() {
     return diff;
 }
 
-void gen(string str, int index = 0, string curr = "") {
-    if (index == str.size()) {
-        res++;
-        cout << res << ":" + curr << '\n';
+void gen(string str, int index = 0, string curr="" ) {
+    int n = str.length();
+    if (index == n) {
+        cout << curr << '\n';
         return;
     }
-    gen(str, index + 1, curr + str[index]);
+    gen(str, index + 1, curr+str[index]);
     gen(str, index + 1, curr);
+}
+
+void solve() {
+    int t = 1;
+    // cin >> t;
+    while(t--) {
+        string str;
+        cin >> str;
+        gen(str);
+    }
 }
 
 int main() {
@@ -33,10 +43,10 @@ int main() {
         freopen("in", "r", stdin);
     #endif
     
-    string str;
-    cin >> str;
-    gen(str);
+    solve();
     
-    cerr << "\n\n**ET : " << tick() << "**\n";
+    #ifndef ONLINE_JUDGE
+        cerr << "\n**ET : " << tick() << "**\n";
+    #endif
     return 0;
 }

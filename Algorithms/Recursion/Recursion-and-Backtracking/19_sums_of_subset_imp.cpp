@@ -1,0 +1,60 @@
+// g++ -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector
+
+// In this question as it demands to find the sum, then why does we have to calculate the 
+// subsets, just keep a track of the sum of the subsets
+
+
+#include <bits/stdc++.h>
+#define ll long long int
+#define pb push_back
+#define mp make_pair
+#define pp pop_back
+using namespace std;
+const int MAX = 10e6;
+vector<int> res;
+
+void store(vector<int> v, int sum, int index) {
+    if (index == v.size()) {
+        res.pb(sum);
+        return;
+    }
+    store(v, sum + v[index], index+1);
+    store(v, sum, index+1);
+}
+
+void gen(vector<int> v, int n) {
+    int sum = 0;
+    store(v, sum, 0);
+}
+
+void solve() {
+    int t;
+    cin >> t;
+    while(t--) {
+        res.clear();
+        int n;
+        cin >> n;
+        vector<int> v(n);
+        for (int i=0; i<n; i++) {
+            cin >> v[i];
+        }
+        gen(v, n);
+        sort(res.begin(), res.end());
+        for (int i: res) {
+            cout << i << " ";
+        }
+        cout << '\n';
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+
+    
+    solve();
+
+    return 0;
+}
