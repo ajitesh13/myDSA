@@ -1,0 +1,1 @@
+{"group":"local","interactive":false,"local":true,"memoryLimit":1024,"name":"Local: 4_nearest_power","srcPath":"/home/ajitesh/myDSA/logarithms/4_nearest_power.cpp","tests":[{"id":1598676794367,"input":"7 2","output":"4 8"},{"id":1598676817435,"input":"18 3","output":"9 27"}],"timeLimit":3000,"url":"/home/ajitesh/myDSA/logarithms/4_nearest_power.cpp"}

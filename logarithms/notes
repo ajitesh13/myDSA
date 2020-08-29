@@ -1,0 +1,2 @@
+1. for checking if a operation is integer is not, make the ceil of that number equal to floor, if return true, it is a integer or 
+not an integer
