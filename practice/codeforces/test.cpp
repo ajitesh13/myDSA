@@ -15,40 +15,14 @@ double tick() {
     return diff;
 }
 
-bool cmp(pair<int,int> p1, pair<int,int> p2) {
-    int s1 = p1.second - p1.first;
-    int s2 = p2.second - p2.first;
-    if (s1 < s2) {
-        return p1 < p2;
-    }
-    //  else if (s2 > s1) {
-    //     return p2 < p1;
-    // }
-    return true;
-    //  else {
-    //     if (p1.first < p2.first) {
-    //         return p1 < p2;
-    //     } else {
-    //         return p2 < p1;
-    //     }
-    // }
-}
-
 void solve() {
-    int t = 1;
-    // cin >> t;
+    int t;
+    cin >> t;
     int google_contest_count = 0;
     while(t--) {
-        deque<pair<int,int>> dq;
-        dq.pb(mp(4,6));
-        dq.pb(mp(1,2));
-        dq.pb(mp(2,2));
-        dq.pb(mp(4,4));
-        dq.pb(mp(6,6));
-        sort(dq.begin(), dq.end(), cmp);
-        for (int i=0; i<dq.size(); i++) {
-            cout << dq[i].first << " " << dq[i].second << '\n';
-        }
+        string s = "Aji";
+        string t = "Pan";
+        cout << (s+t) << '\n';
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
