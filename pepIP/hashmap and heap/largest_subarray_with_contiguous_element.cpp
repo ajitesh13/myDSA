@@ -15,15 +15,6 @@ double tick() {
     return diff;
 }
 
-struct key {
-    int freq;
-    char ch;
-
-    bool operator<(const key &k) const {
-        return freq < k.freq;
-    }
-};
-
 void solve() {
     int t;
     cin >> t;
@@ -31,37 +22,23 @@ void solve() {
     while(t--) {
         int n;
         cin >> n;
-        string str;
-        cin >> str;
-        vector<int> count(26);
-        unordered_map<char, int> um;
-        for (int i=0; i<str.size(); i++) {
-            if (um.find(str[i]) == um.end()) {
-                um.insert(mp(str[i], 1));
-            } else {
-                um[str[i]]++;
+        vector<int> v(n);
+        for (int i=0; i<n; i++) {
+            cin >> v[i];
+        }
+        priority_queue<int, vector<int>> pq;
+        for (int i=0; i<n; i++) {
+            // int smax = v[i], smin = v[i];
+            for (int j=i+1; j<n; j++) {
+                cout << smax << ' ' << smin << '\n';
+                smax = max(smax, v[j]);
+                smin = min(smin, v[j]);
+                if (j-i+1 == smax - smin + 1) {
+                    pq.push(j-i+1);
+                }
             }
         }
-        priority_queue<key> pq;
-        for (auto it = um.begin(); it != um.end(); it++) {
-            pq.push({it->second, it->first});
-        }
-
-        string res = "";
-        key temp = {'#', '-1'};
-        while (!pq.empty()) {
-            if (temp.ch != '#') {
-                pq.push(temp);
-            }
-            key k = pq.top();
-            pq.pop();
-            res += k.ch;
-            k.freq--;
-            if (k.freq > 0) {
-                pq.push({k.ch, k.freq});
-            }
-        }
-        
+        if (!pq.empty()) cout << pq.top() << '\n';
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
