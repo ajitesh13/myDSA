@@ -1,71 +1,65 @@
-// g++ -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector
+// A -> 1, 2, 3
+// B -> 2, 4
+// C -> 5
+
+// 1 -> A
+// 2 -> A, B
+// 3 -> A
+// 4 -> B
+// 5 -> C
+
 #include <bits/stdc++.h>
-#define ll long long int
-#define pb push_back
-#define mp make_pair
-#define mt make_tuple
-#define pp pop_back
 using namespace std;
-const int MAX = 10e6;
-
-double tick() {
-    static clock_t oldt, newt = clock();
-    double diff = 1.0 * (newt - oldt) / CLOCKS_PER_SEC;
-    oldt = newt;
-    return diff;
-}
-
-void solve() {
-    int t;
-    cin >> t;
-    int google_contest_count = 0;
-    while(t--) {
-        ll n, m;
-        cin >> n >> m;
-        if (n == 1) {
-            cout << 0 << '\n';
-            continue;
-        } else if (n == 2) {
-            cout << m << '\n';
-            continue;
-        } else if (n == 3) {
-            cout << 2*m << '\n';
-            continue;
-        } 
-        ll p = n/2;
-        vector<ll> v;
-        for (ll i=1; i<p; i++) {
-            m--;
-            v.pb(1);
-        }
-        v.pb(m);
-        ll sum = 0;
-        for (ll i=0; i<v.size(); i++) {
-            sum += v[i];
-        }
-        if (n % 2 != 0) {
-            cout << 2*sum << '\n';
-        } else {
-            cout << 2*sum - 1 << '\n';
-        }
-        // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
-    }
-}
 
 int main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
+    cout << 'e';
+    map<char, vector<int>> mp;
+    vector<int> a = {1, 2, 3};
+    vector<int> b = {2, 4};
+    vector<int> c = {5};
+    mp.insert(make_pair('A', a));
+    mp.insert(make_pair('B', b));
+    mp.insert(make_pair('C', c));
+    set<int> s;
+    for (auto it = mp.begin(); it != mp.end(); it++) {
+        for (int i=0; i<it->second.size(); i++) {
+            s.insert(it->second[i]);
+        }
+    }
+
+    for 
+    vector<char> nullvec;
+    map<int, vector<char>> res;
+
+    cout << 1;
+
+    for (auto it=s.begin(); it!=s.end(); it++) {
+        res.insert(make_pair(*it, nullvec));
+    }
+
+    cout << 2;
+
+    for (auto it=mp.begin(); it!=mp.end(); it++) {
+        int value = it->first;
+        for (int i=0; i<it->second.size(); it++) {
+            res[it->second[i]].push_back(value);
+        }
+    }
+
+    cout << 3;
     
-    #ifndef ONLINE_JUDGE
-        freopen("in", "r", stdin);
-    #endif
-    
-    solve();
-    
-    #ifndef ONLINE_JUDGE
-        cerr << "\n**ET : " << tick() << "**\n";
-    #endif
-    
+    for (auto it = res.begin(); it != res.end(); it++) {
+        cout << it->first << " ";
+        cout << 'j';
+        for (int i = 0; i<it->second.size(); it++) {
+            cout << it->second[i] << ' ';
+        }
+        cout<< '\n';
+    }
+
+    cout << 4;
+
+
+
     return 0;
 }

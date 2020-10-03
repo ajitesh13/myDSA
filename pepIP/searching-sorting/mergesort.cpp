@@ -15,6 +15,10 @@ double tick() {
     return diff;
 }
 
+void merge_sort(vector<int> v1, vector<int> v2) {
+    
+}
+
 void solve() {
     int t = 1;
     // cin >> t;
