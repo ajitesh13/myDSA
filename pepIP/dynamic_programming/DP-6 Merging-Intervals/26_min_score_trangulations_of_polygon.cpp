@@ -29,17 +29,10 @@ void solve() {
                 for (int i=left+1; i<right; i++) {
                     if (dp[left][right] == 0) dp[left][right] = dp[left][i] + dp[i][right] + A[left]*A[i]*A[right]; 
                     else dp[left][right] = min(dp[left][right], dp[left][i] + dp[i][right] + A[left]*A[i]*A[right]);
-                    if (gap == 4 && left == 0) cout << dp[left][i] << ' ' << dp[i][right] << ' ' << A[left]*A[i]*A[right] << '\n';
                 }
             }
         }
-        // for (int i=0; i<n; i++) {
-        //     for (int j=0; j<n; j++) {
-        //         cout << dp[i][j] << ' ';
-        //     } 
-        //     cout << '\n';
-        // }
-        // cout << dp[0][n-1] << '\n';
+        cout << dp[0][n-1] << '\n';
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
