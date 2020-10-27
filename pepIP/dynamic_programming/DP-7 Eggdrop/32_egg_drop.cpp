@@ -1,0 +1,1 @@
+// write the code, its easy bt revise the concepts
