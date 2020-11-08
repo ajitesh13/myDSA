@@ -5,7 +5,8 @@ for (int r1=0; r1<arr.size(); r++) {
             if (arr[r1][c1] == -1 || arr[r2][c2] == -1) {
                 continue;
             }
-            int temp = max(dp[r1-1][c1][r2], dp[r1-1][c1][r2], dp[r1][c1-1][r2], dp[r1][c1-1][r2]);
+            int temp = max(dp[r1-1][c1][r2], dp[r1-1][c1][r2], 
+            dp[r1][c1-1][r2], dp[r1][c1-1][r2]);
             int cherry;
             if (r1 == r2 && c1 == c2) {
                 cherry = arr[r1][c1];

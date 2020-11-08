@@ -1,0 +1,1 @@
+// write lcs for 3 string

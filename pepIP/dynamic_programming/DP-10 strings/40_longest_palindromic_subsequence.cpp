@@ -1,0 +1,67 @@
+// g++ -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector
+#include <bits/stdc++.h>
+#define ll long long int
+#define pb push_back
+#define mp make_pair
+#define mt make_tuple
+#define pp pop_back
+using namespace std;
+const int MAX = 10e6;
+
+double tick() {
+    static clock_t oldt, newt = clock();
+    double diff = 1.0 * (newt - oldt) / CLOCKS_PER_SEC;
+    oldt = newt;
+    return diff;
+}
+
+void solve() {
+    int t = 1;
+    // cin >> t;
+    // int google_contest_count = 0;
+    while(t--) {
+        string s = "bbbab";
+        int n = s.size();
+        vector<vector<int>> dp(n, vector<int> (n, 0));
+        for (int i=0; i<n; i++) {
+            dp[i][i] = 1;
+        }
+        for (int gap = 1; gap < n; gap++) {
+            for (int left = 0; left < n - gap; left++) {
+                int right = left + gap;
+                if (s[left] == s[right]) {
+                    dp[left][right] = dp[left+1][right-1] + 2;
+                } else {
+                    dp[left][right] = max(dp[left][right-1], dp[left+1][right]);
+                }
+            }
+        }
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<n; j++) {
+                cout << dp[i][j] << ' ';
+            }
+            cout << '\n';
+        }
+        cout << dp[0][n-1] << '\n';
+        // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    
+    #ifndef ONLINE_JUDGE
+        freopen("in", "r", stdin);
+        // freopen("out", "w", stdout);
+    #endif
+    
+    solve();
+    
+    #ifndef ONLINE_JUDGE
+        cerr << "\n**ET : " << tick() << "**\n";
+    #endif
+    
+    return 0;
+}

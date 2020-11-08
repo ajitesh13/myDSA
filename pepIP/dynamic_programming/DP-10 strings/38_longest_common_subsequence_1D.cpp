@@ -1,0 +1,1 @@
+// write the lcs program in 1D array
