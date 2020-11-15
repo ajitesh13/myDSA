@@ -1,0 +1,6 @@
+a = 00000101
+a << 1 = 00001010 (shift the number by one digit)
+a << 2 = 00010100 (sift the number by two digits)
+
+x << y => x * (2^y)
+x >> y => x / (2^y)
