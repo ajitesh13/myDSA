@@ -18,34 +18,39 @@ double tick() {
 void solve() {
     int t;
     cin >> t;
-    int google_contest_count = 0;
+    // int google_contest_count = 0;
     while(t--) {
         int n;
         cin >> n;
         vector<int> v(n);
-        int m = 0;
         for (int i=0; i<n; i++) {
             cin >> v[i];
-            if (v[i] > 0) {
-                m++;
+        }
+        vector<int> dp(n, 0);
+        vector<int> start(n, 0);
+        for (int i=1; i<n; i++) {
+            int cntr = 0;
+            for (int j=start[i-1]; j<i; j++) {
+                if (v[j] > v[i]) {
+                    dp[i] = dp[i-1];
+                    start[i] = i;
+                    cntr++;
+                }
+            } 
+            if ( cntr == 0) {
+                dp[i] = dp[i-1] + 1;
+                start[i] = start[i-1];
             }
         }
-        int z = 0;
-        sort(v.begin(), v.end());
-        if (m == 0) {
-            cout << 0 << '\n';
-        } else {
-            int cnt = 0;
-            for (int i=0; i<n; i++) {
-                if (v[i] != v[i+1]) {
-                    cnt++;
-                }
-                if (v[i] == 0) {
-                    z++;
-                }
-            }
-            cout << cnt-z << '\n';
-        }
+        // for (int i=0; i<n; i++) {
+        //     cout << dp[i] << ' ';
+        // }
+        // cout << '\n';
+        // for (int j=0; j<n; j++) {
+        //     cout << start[j] << ' '; 
+        // }
+        // cout << '\n';
+        cout << dp[v.size()-1] + v.size() << '\n';
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
