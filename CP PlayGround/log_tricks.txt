@@ -1,0 +1,5 @@
+number of digits = 
+
+int countDigit(long long n) { 
+    return floor(log10(n) + 1); 
+} 
