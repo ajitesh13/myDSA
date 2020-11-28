@@ -16,46 +16,27 @@ double tick() {
 }
 
 void solve() {
-    int t;
-    cin >> t;
+    int t = 1;
+    // cin >> t;
     // int google_contest_count = 0;
     while(t--) {
-        int n;
-        cin >> n;
-        vector<int> v(n);
-        unordered_map<int,int> ump;
-        for (int i=0; i<n; i++) {
-            cin >> v[i];
-        }
-        ump.insert(mp(v[0], 1));
-        for (int i=1; i<n; i++) {
-            if (v[i] == v[i-1]) {
-                continue;
+        vector<int> people = {3, 2, 2, 1};
+        int limit=3;
+        int n = people.size();
+        int i=0, j=n-1;
+        int cnt=0;
+        sort(people.begin(), people.end());
+        while (i <= j) {
+            if (people[i] + people[j] > limit) {
+                cnt++;
+                j--;
             } else {
-                if (ump.find(v[i]) == ump.end()) {
-                    ump.insert(mp(v[i], 1));
-                } else {
-                    ump[v[i]]++;
-                }
+                cnt++;
+                i++;
+                j--;
             }
         }
-        vector<int> res;
-        for (auto it=ump.begin(); it!=ump.end(); it++) {
-            if (it->second == n) {
-                res.pb(0);
-                break;
-            }
-            if (it->first == v[0] && it->first == v[n-1]) {
-                res.pb(it->second-1);
-            } else if (it->first == v[0] || it->first == v[n-1]) {
-                res.pb(it->second);
-            } else {
-                res.pb(it->second+1);
-            }
-        }
-        sort(res.begin(), res.end());
-        cout << res[0] << '\n';
-        
+        cout << cnt << '\n';
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }

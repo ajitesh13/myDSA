@@ -6,6 +6,7 @@
 #define mt make_tuple
 #define pp pop_back
 using namespace std;
+const int MAX = 10e6;
 
 double tick() {
     static clock_t oldt, newt = clock();
@@ -14,46 +15,33 @@ double tick() {
     return diff;
 }
 
+vector<int> primeFactors(int n) {  
+    vector<int> res;
+    while (n % 2 == 0) {  
+        res.pb(2);
+        n = n/2;  
+    }  
+ 
+    for (int i = 3; i <= sqrt(n); i = i + 2) {  
+        while (n % i == 0) {  
+            res.pb(i); 
+            n = n/i;  
+        }  
+    }  
+
+    if (n > 2) {
+        res.pb(n); 
+    }
+    return res;
+}  
+
 void solve() {
-    int t;
-    cin >> t;
+    int t = 1;
+    // cin >> t;
     // int google_contest_count = 0;
     while(t--) {
-        int n;
-        cin >> n;
-        vector<int> v(n);
-        unordered_map<int,int> ump;
-        for (int i=0; i<n; i++) {
-            cin >> v[i];
-            if (ump.find(v[i]) == ump.end()) {
-                ump.insert(mp(v[i], 1));
-            } else {
-                ump[v[i]]++;
-            }
-        }
-        int cnt = 0;
-        vector<int> res1;
-        for (auto it=ump.begin(); it != ump.end(); it++) {
-            if (it->second == 1) {
-                res1.pb(it->first);
-                cnt++;
-            }
-        }
-        if (cnt == 0) {
-            cout << -1 << '\n';
-        } else {
-            int ans = 0;
-            sort(res1.begin(), res1.end());
-            for (int i=0; i<n; i++) {
-                if (v[i] == res1[0]) {
-                    ans = i;
-                }
-            }
-            cout << ans+1 << '\n';
-        }
-        
-        
-        
+        vector<int> res = primeFactors(720);
+        int 
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
