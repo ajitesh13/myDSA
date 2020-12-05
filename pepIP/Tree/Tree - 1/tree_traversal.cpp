@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+#define null NULL
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+    Node(int data) {
+        this->data = data;
+        left = right = null;
+    }
+};
+
+void preorder(Node* root) {
+    if (root ==  null) {
+        return;
+    }
+    cout << root->data << ' ';
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void inorder(Node* root) {
+    if (root == null) {
+        return;
+    }
+    inorder(root->left);
+    cout << root->data << ' ';
+    inorder(root->right);
+}
+
+void postorder(Node* root) {
+    if (root == null) {
+        return;
+    }
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data << ' ';
+}
+
+int main() {
+    Node *root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->right = new Node(4);
+    root->left->left = new Node(5);
+    root->right->left = new Node(6);
+    root->right->right = new Node(7);
+
+    preorder(root); cout<<'\n';
+    inorder(root); cout<<'\n';
+    postorder(root); cout<<'\n';
+    return 0;
+}
