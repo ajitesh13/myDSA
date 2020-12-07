@@ -15,16 +15,16 @@ double tick() {
 }
 
 // min-heap
-// class comp{
-// public:
-//	bool operator() (int& a, int& b) {
-//		return a > b;
-//	}
-// };
+class comp{
+public:
+    bool operator() (int& a, int& b) {
+        return a > b;
+    }
+};
 
 // sort pair
 bool comp1(pair<int,int> a, pair<int,int> b) {
-	return(a.second < b.second);
+    return(a.second < b.second);
 }
 
 void solve() {
@@ -32,37 +32,30 @@ void solve() {
     cin >> t;
     // int google_contest_count = 0;
     while(t--) {
-        int n;
-        cin >> n;
+        int n, k;
+        cin >> n >> k;
+        string a, b;
+        cin >> a >> b;
+        vector<int> have(27, 0);
+        vector<int> need(27, 0);
+        for (int i=0; i<n; i++) {
+            have[a[i] - 'a']++;
+            need[b[i] - 'a']++;
+        }
+        bool res = true;
+        for (int i=0; i<n; i++) {
+            if (have[i] < need[i] || (need[i]-have[i])%k != 0) {
+                res = false;
+            }
+            have[i] = have[i] - need[i];
+            have[i+1] = have[i+1] + have[i];
+        }
+        if (res == true) {
+            cout << "YES" << '\n';
+        } else {
+            cout << "NO" << '\n';
+        }
 
-        vector<pair<int,int>> v;
-        
-        for (ll i=2; i*i<=n; i++) {
-            int cnt = 0;
-            while (n % i == 0) {
-                cnt++;
-                n = n/i;
-            }
-            if (cnt > 0) {
-                v.pb({cnt, i});
-            }
-        }
-        if (n > 1) {
-            v.pb({1, n});
-        }
-        sort(v.begin(), v.end(), comp1);
-        // for (int i=0; i<v.size(); i++) {
-        //     cout << v[i].first << ' ' << v[i].second << '\n';
-        // }
-        ll num=1;
-        for (ll i=1; i<v.size(); i++) {
-            num *= pow(v[i].second, v[i].first);
-        }
-        num *= v[0].second;
-        for (int i=1; i<=v[0].first-1; i++) {
-            cout << v[0].second << ' ';
-        }
-        cout << num << '\n';
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
