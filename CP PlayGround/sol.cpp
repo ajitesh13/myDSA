@@ -28,34 +28,62 @@ bool comp1(pair<int,int> a, pair<int,int> b) {
 }
 
 void solve() {
-    int t;
-    cin >> t;
+    int t = 1;
+    // cin >> t;
     // int google_contest_count = 0;
     while(t--) {
-        int n, k;
-        cin >> n >> k;
-        string a, b;
-        cin >> a >> b;
-        vector<int> have(27, 0);
-        vector<int> need(27, 0);
+        int n;
+        cin >> n;
+        vector<int> v(n);
         for (int i=0; i<n; i++) {
-            have[a[i] - 'a']++;
-            need[b[i] - 'a']++;
+            cin >> v[i];
         }
-        bool res = true;
-        for (int i=0; i<n; i++) {
-            if (have[i] < need[i] || (need[i]-have[i])%k != 0) {
-                res = false;
+        vector<pair<int,int>> join;
+        for (int i=0; i<n-1; i++) {
+            join.pb({v[i], v[i+1]});
+        }
+        // for (int i=0; i<join.size(); i++) {
+        //     cout << join[i].first << ' ' << join[i].second << '\n';
+        // }
+        int cntr = 0;
+        for (int i=0; i<join.size(); i++) {
+            for (int j=0; j<join.size(); j++) {
+                if (join[j].first < join[i].first) {
+                    if (join[j].second > join[i].first && join[j].second < join[i].second) {
+                        cntr++;  
+                    }
+                } else if (join[j].first > join[i].first && join[j].first < join[i].second) {
+                    if (join[j].second > join[i].second) {
+                        cntr++; 
+                    } else if (join[j].second < join[i].first) {
+                        cntr++;
+                    }
+                } else if (join[j].first > join[i].second)  {
+                    if (join[j].second > join[i].first && join[j].second < join[i].second) {
+                        cntr++;
+                    }
+                } else if (join[j].first < join[i].second) {
+                    if (join[j].second > join[i].second && join[j].second < join[i].first) {
+                        cntr++;  
+                    }
+                } else if (join[j].first > join[i].second && join[j].first < join[i].first) {
+                    if (join[j].second > join[i].first) {
+                        cntr++; 
+                    } else if (join[j].second < join[i].second) {
+                        cntr++;
+                    }
+                } else if (join[j].first > join[i].first)  {
+                    if (join[j].second > join[i].second && join[j].second < join[i].first) {
+                        cntr++;
+                    }
+                }
             }
-            have[i] = have[i] - need[i];
-            have[i+1] = have[i+1] + have[i];
         }
-        if (res == true) {
-            cout << "YES" << '\n';
+        if (cntr != 0) {
+            cout << "yes" << '\n';
         } else {
-            cout << "NO" << '\n';
+            cout << "no" << '\n';
         }
-
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
