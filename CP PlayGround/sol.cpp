@@ -28,62 +28,37 @@ bool comp1(pair<int,int> a, pair<int,int> b) {
 }
 
 void solve() {
-    int t = 1;
-    // cin >> t;
+    vector<ll> v = {0};
+    ll i = 1, k = 0;
+    while (i < 2*1000000000) {
+        v.pb(i);
+        k++;
+        i += k;
+    }
+    int t;
+    cin >> t;
     // int google_contest_count = 0;
     while(t--) {
-        int n;
-        cin >> n;
-        vector<int> v(n);
-        for (int i=0; i<n; i++) {
-            cin >> v[i];
-        }
-        vector<pair<int,int>> join;
-        for (int i=0; i<n-1; i++) {
-            join.pb({v[i], v[i+1]});
-        }
-        // for (int i=0; i<join.size(); i++) {
-        //     cout << join[i].first << ' ' << join[i].second << '\n';
-        // }
-        int cntr = 0;
-        for (int i=0; i<join.size(); i++) {
-            for (int j=0; j<join.size(); j++) {
-                if (join[j].first < join[i].first) {
-                    if (join[j].second > join[i].first && join[j].second < join[i].second) {
-                        cntr++;  
-                    }
-                } else if (join[j].first > join[i].first && join[j].first < join[i].second) {
-                    if (join[j].second > join[i].second) {
-                        cntr++; 
-                    } else if (join[j].second < join[i].first) {
-                        cntr++;
-                    }
-                } else if (join[j].first > join[i].second)  {
-                    if (join[j].second > join[i].first && join[j].second < join[i].second) {
-                        cntr++;
-                    }
-                } else if (join[j].first < join[i].second) {
-                    if (join[j].second > join[i].second && join[j].second < join[i].first) {
-                        cntr++;  
-                    }
-                } else if (join[j].first > join[i].second && join[j].first < join[i].first) {
-                    if (join[j].second > join[i].first) {
-                        cntr++; 
-                    } else if (join[j].second < join[i].second) {
-                        cntr++;
-                    }
-                } else if (join[j].first > join[i].first)  {
-                    if (join[j].second > join[i].second && join[j].second < join[i].first) {
-                        cntr++;
-                    }
-                }
+        ll n, k;
+        cin >> n >> k;
+        ll index = 0, diff = 0;
+        ll i;
+        for (i=1; i<v.size(); i++) {
+            if (k < v[i]) {
+                index = i-1;
+                diff = k - v[index];
+                break;
+            } else if (k == v[i]) {
+                index = i;
+                diff = k - v[index];
             }
         }
-        if (cntr != 0) {
-            cout << "yes" << '\n';
-        } else {
-            cout << "no" << '\n';
-        }
+        string str(n, 'a');
+        ll firstb = n - index - 1;
+        ll secondb = n - diff - 1;
+        str[firstb] = 'b';
+        str[secondb] = 'b';
+        cout << str << '\n';
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
@@ -95,7 +70,7 @@ int main() {
     
     #ifndef ONLINE_JUDGE
         freopen("in", "r", stdin);
-        // freopen("out", "w", stdout);
+        freopen("out", "w", stdout);
     #endif
     
     solve();
