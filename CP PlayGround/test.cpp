@@ -22,13 +22,11 @@ bool comp1(pair<int,int> a, pair<int,int> b) {
 }
 
 void solve() {
-    int t = 1;
-    // cin >> t;
+    int t;
+    cin >> t;
     // int google_contest_count = 0;
     while(t--) {
-        int a = 9;
-        bool fl = true;
-        if (t==0) cout << a << '\n'; cout << fl << '\n'; 
+        
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }

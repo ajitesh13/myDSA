@@ -1,0 +1,1 @@
+prime gap of number less than billion doesn't exceed 300

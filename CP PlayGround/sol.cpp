@@ -28,15 +28,38 @@ void solve() {
     while(t--) {
         int n;
         cin >> n;
-        vector<int> v(n+1);
-        for (int i=1; i<=n; i++) {
-            cin >> v[i];
+        vector<int> r(n);
+        for (int i=0; i<n; i++) {
+            cin >> r[i];
         }
-        for (int i=0; i<=n+1; i++) {
-            for (int j=i; j<n+1; j+=i) {
-                
-            }
+        int m;
+        cin >> m;
+        vector<int> b(m);
+        for (int i=0; i<m; i++) {
+            cin >> b[i];
         }
+        vector<int> rprefix(n, 0);
+        vector<int> bprefix(m, 0);
+        rprefix[0] = r[0];
+        bprefix[0] = b[0];
+        int mx1 = INT32_MIN, mx2 = INT32_MIN;
+        for (int i=1; i<n; i++) {
+            rprefix[i] = rprefix[i-1] + r[i];
+            mx1 = max(mx1, rprefix[i]);
+        }
+        for (int i=1; i<m; i++) {
+            bprefix[i] = bprefix[i-1] + b[i];
+            mx2 = max(mx2, bprefix[i]);
+        }
+        mx1 = max(mx1, rprefix[0]);
+        mx2 = max(mx2, bprefix[0]);
+        mx1 = max(mx1, 0);
+        mx2 = max(mx2, 0);
+        int res;
+        res = max(0, mx1+mx2);
+        cout << res << '\n';
+        
+
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
