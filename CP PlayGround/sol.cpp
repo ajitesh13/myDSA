@@ -6,6 +6,18 @@
 #define pp pop_back
 #define f first
 #define s second
+#define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
+#define printvec(x) for(int _=0;_<x.size();_++){cout<<x[_]<<' ';}cout<<'\n';
+#define printvvec(x) for(int _=0;_<x.size();_++){for(int __=0;__<x[_].size(); __++){cout<<x[_][__]<<' ';}cout<<'\n';}
+#define printmap(x) for(auto _=x.begin();_!=x.end();_++){cout<<_->f<<' '<<_->s<<'\n';}
+#define printset(x) for(auto _=x.begin();_!=x.end();_++){cout<<*_<<' ';}cout<<'\n';
+#define printvecp(x) for(int _=0;_<x.size();_++){cout<<x[_].f<<' '<<x[_].s<<'\n';}
+#define printp(x) cout<<x.f<<' '<< x.s<<'\n';
+#define fo(i,start,end) int i=start;i<end;i++
+#define foi(i,start,end) int i=start;i<=end;i++
+#define fot(it, x) auto it=x.begin();it!=x.end();it++
+#define invec(v, n) for(int i=0;i<v.size();i++)cin>>v[i];
 using namespace std;
 
 // min-heap
@@ -26,40 +38,35 @@ void solve() {
     cin >> t;
     // int google_contest_count = 0;
     while(t--) {
-        int n;
-        cin >> n;
-        vector<int> r(n);
+        ll n, x;
+        cin >> n >> x;
+        vector<ll> v(n);
         for (int i=0; i<n; i++) {
-            cin >> r[i];
+            cin >> v[i];
         }
-        int m;
-        cin >> m;
-        vector<int> b(m);
-        for (int i=0; i<m; i++) {
-            cin >> b[i];
+        ll min_pow = INT64_MAX, index_min_pow;
+        for (int i=n-1; i>=0; i--) {
+            ll cnt = 0;
+            ll k = v[i];
+            while (k%x == 0) {
+                k /= x;
+                cnt++;
+            }
+            min_pow = min(min_pow, cnt);
+            if (cnt == min_pow) {
+                index_min_pow = i;
+            }
         }
-        vector<int> rprefix(n, 0);
-        vector<int> bprefix(m, 0);
-        rprefix[0] = r[0];
-        bprefix[0] = b[0];
-        int mx1 = INT32_MIN, mx2 = INT32_MIN;
-        for (int i=1; i<n; i++) {
-            rprefix[i] = rprefix[i-1] + r[i];
-            mx1 = max(mx1, rprefix[i]);
+        // cout << min_pow << ' ' << index_min_pow << '\n';
+        ll res = 0;
+        for (int i=0; i<index_min_pow; i++) {
+            res += v[i]*(min_pow+2);
         }
-        for (int i=1; i<m; i++) {
-            bprefix[i] = bprefix[i-1] + b[i];
-            mx2 = max(mx2, bprefix[i]);
+        for (int i=index_min_pow; i<n; i++) {
+            res += v[i]*(min_pow+1);
         }
-        mx1 = max(mx1, rprefix[0]);
-        mx2 = max(mx2, bprefix[0]);
-        mx1 = max(mx1, 0);
-        mx2 = max(mx2, 0);
-        int res;
-        res = max(0, mx1+mx2);
         cout << res << '\n';
         
-
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }

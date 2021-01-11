@@ -1,47 +1,18 @@
 #include <bits/stdc++.h>
-#define ll long long int
-#define pb push_back
-#define mp make_pair
-#define mt make_tuple
-#define pp pop_back
-#define f first
-#define s second
 using namespace std;
 
-// min-heap
-class comp{
-public:
-    bool operator() (int& a, int& b) {
-        return a > b;
-    }
-};
-
-// sort pair
-bool comp1(pair<int,int> a, pair<int,int> b) {
-    return(a.second < b.second);
-}
-
-void solve() {
-    int t;
-    cin >> t;
-    // int google_contest_count = 0;
-    while(t--) {
-        
-        // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
-    }
-}
-
 int main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
-    #ifndef ONLINE_JUDGE
-        freopen("in", "r", stdin);
-        // freopen("out", "w", stdout);
-    #endif
-    
-    solve();
+    int n = 81, x = 3;
+    int cnt = 0;
+    while (n%x == 0) {
+        cnt++;
+        n /= x;
+    }
+    cout << cnt << '\n';
     
     return 0;
 }
