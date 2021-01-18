@@ -14,7 +14,7 @@ int kthsmallest(TreeNode* root, int k) {
     vector<int> res;
     TreeNode* curr = root;
     while (curr != nullptr) {
-        if (curr->left == nullptr) {
+        if (curr->left == nullptr) {    
             // cout << curr->val << ' ';
             res.push_back(curr->val);
             curr = curr->right;

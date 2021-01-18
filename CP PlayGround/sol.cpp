@@ -34,38 +34,12 @@ bool comp1(pair<int,int> a, pair<int,int> b) {
 }
 
 void solve() {
-    int t;
-    cin >> t;
+    int t = 1;
+    // cin >> t;
     // int google_contest_count = 0;
     while(t--) {
-        ll n, x;
-        cin >> n >> x;
-        vector<ll> v(n);
-        for (int i=0; i<n; i++) {
-            cin >> v[i];
-        }
-        ll min_pow = INT64_MAX, index_min_pow;
-        for (int i=n-1; i>=0; i--) {
-            ll cnt = 0;
-            ll k = v[i];
-            while (k%x == 0) {
-                k /= x;
-                cnt++;
-            }
-            min_pow = min(min_pow, cnt);
-            if (cnt == min_pow) {
-                index_min_pow = i;
-            }
-        }
-        // cout << min_pow << ' ' << index_min_pow << '\n';
-        ll res = 0;
-        for (int i=0; i<index_min_pow; i++) {
-            res += v[i]*(min_pow+2);
-        }
-        for (int i=index_min_pow; i<n; i++) {
-            res += v[i]*(min_pow+1);
-        }
-        cout << res << '\n';
+        int n, W;
+        cin >> n >> W;
         
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
