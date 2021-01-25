@@ -1,0 +1,1 @@
+// first make lc solution accepted than add code here

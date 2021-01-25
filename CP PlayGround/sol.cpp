@@ -33,14 +33,48 @@ bool comp1(pair<int,int> a, pair<int,int> b) {
     return(a.second < b.second);
 }
 
+ll dijkstra(vector<vector<pair<int,int>>>& adj, int source, int target) {
+    ll n = adj.size();
+    priority_queue<pair<int,int>> q;
+    vector<ll> distance(n, INT64_MAX);
+    vector<bool> visit(n, false);
+    distance[source] = 0;
+    q.push({0, source});
+    while (!q.empty()) {
+        ll a = q.top().second;
+        q.pop();
+        if (!visit[a]) {
+            visit[a] = true;
+            for (auto u: adj[a]) {
+                ll b = u.first, w = u.second;
+                distance[b] = min(distance[b], distance[a]+w);
+                q.push({-distance[b], b});
+            }
+        }
+    }
+    return distance[target];
+}
+
 void solve() {
     int t = 1;
     // cin >> t;
     // int google_contest_count = 0;
     while(t--) {
-        int n, W;
-        cin >> n >> W;
-        
+        ll n, e;
+        cin >> n >> e;
+        vector<vector<pair<int,int>>> adj(n+1);
+        for (int i=1; i<=e; i++) {
+            ll x, y;
+            cin >> x >> y;
+            adj[x].push_back({y, 0});
+            adj[y].push_back({x, 1});
+        }
+        ll res = dijkstra(adj, 1, n);
+        if (res < INT64_MAX) {
+            cout << res << '\n';
+        } else {
+            cout << -1 << '\n';
+        }
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
