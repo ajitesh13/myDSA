@@ -19,7 +19,6 @@
 #define fot(it, x) auto it=x.begin();it!=x.end();it++
 #define invec(v, n) for(int i=0;i<v.size();i++)cin>>v[i];
 using namespace std;
-vector<int> res;
 
 // min-heap
 class comp{
@@ -34,44 +33,12 @@ bool comp1(pair<int,int> a, pair<int,int> b) {
     return(a.second < b.second);
 }
 
-unordered_set<int> sieve(int n) {
-    unordered_set<int> st;
-    vector<bool> is_prime(n+1, true);
-    is_prime[0] = is_prime[1] = false;
-    for (int i=2; i<=n; i++) {
-        if (is_prime[i] && (long long)i*i <= n) {
-            for (int j=i*i; j<=n; j+=i) {
-                is_prime[j] = false;
-            }
-        }
-    }
-    for (int i=0; i<n; i++) {
-        if (is_prime[i] == true) {
-            res.pb(i);
-            st.insert(i);
-        }
-    }
-    return st;
-}
-
 void solve() {
     int t;
     cin >> t;
     // int google_contest_count = 0;
     while(t--) {
-        int n;
-        cin >> n;
-        res.clear();
-        unordered_set<int> st = sieve(n);
-        int ans = 0;
-        for (int i=0; i<res.size(); i++) {
-            for (int j=i+1; j<res.size(); j++) {
-                if (st.find(res[i] + res[j]) != st.end()) {
-                    ans++;
-                }
-            }
-        }
-        cout << ans << '\n';
+        
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }

@@ -1,5 +1,3 @@
-// write code of topo sort of graph with cycle
-
 #include <bits/stdc++.h>
 using namespace std;
 deque<int> dq;
@@ -10,7 +8,6 @@ void dfs(int s) {
     if (!visit[s]) {
         visit[s] = true;
         for (int i: adj[s]) {
-            
             dfs(i);
         }
         dq.push_front(s);   
