@@ -6,13 +6,13 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n = 81, x = 3;
-    int cnt = 0;
-    while (n%x == 0) {
-        cnt++;
-        n /= x;
+    unordered_multiset<int> st;
+    st.insert(30);
+    st.insert(30);
+    st.insert(40);
+    for (auto it=st.begin(); it!=st.end(); it++) {
+        cout << *it << ' ';
     }
-    cout << cnt << '\n';
     
     return 0;
 }
