@@ -6,13 +6,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    unordered_multiset<int> st;
-    st.insert(30);
-    st.insert(30);
-    st.insert(40);
-    for (auto it=st.begin(); it!=st.end(); it++) {
-        cout << *it << ' ';
-    }
+    pair<char,char> p1 = {'#', '#'};
+    if (p1 == make_pair('#', '#')) cout << true << '\n';
     
     return 0;
 }

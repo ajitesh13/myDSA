@@ -41,40 +41,33 @@ int string_to_int(string s) {
     return x;
 }
 
+vector<vector<int>> v(4, vector<int> (4, 0));
+bool check(int i, int j) {
+    int sum = v[i][j] + v[i+1][j] + v[i][j+1] + v[i+1][j+1];
+    if (sum == 2) return false;
+    else return true;
+}
+
 void solve() {
     int t = 1;
     // cin >> t;
     // int google_contest_count = 0;
     while(t--) {
-        vector<vector<int>> v(5, vector<int> (5, 0));
-        for (int i=0; i<5; i++) {
-            for (int j=0; j<5; j++) {
-                cin >> v[i][j];
+        for (int i=0; i<4; i++) {
+            for (int j=0; j<4; j++) {
+                char ch;
+                cin >> ch;
+                if (ch == '#') v[i][j] = 1;
             }
         }
-        int mx = INT32_MIN;
-        unordered_map<int,int> ump;
-        priority_queue<pair<int,pair<int,int>>> pq;
-        for (int i=0; i<5; i++) {
-            for (int j=0; j<5; j++) {
-                pq.push({v[i][j] + v[j][i], {v[i][j], v[j][i]}});
+        bool res = false;
+        for (int i=0; i<3; i++) {
+            for (int j=0; j<3; j++) {
+                if (check(i,j)) res = true;
             }
         }
-        while (!pq.empty()) {
-            cout <<  pq.top().first << ' ' << pq.top().second.first << ' ' << pq.top().second.second << '\n';
-            pq.pop();
-        }
-        // int t1 = pq.top().first;
-        // pq.pop();
-        // pq.pop();
-        // int t2 = pq.top().first;
-        // pq.pop();
-        // pq.pop();
-        // int t3 = pq.top().first;
-        // pq.pop();
-        // pq.pop();
-        // int t4 = pq.top().first;
-        // cout << 2*t1+2*t2+t3+t4 << '\n';
+        if (res) cout << "YES\n";
+        else cout << "NO\n";
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
@@ -85,7 +78,7 @@ int main() {
     cout.tie(0);
     
     #ifndef ONLINE_JUDGE
-        // freopen("in", "r", stdin);
+        //freopen("in", "r", stdin);
         // freopen("out", "w", stdout);
     #endif
     
