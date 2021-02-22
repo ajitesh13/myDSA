@@ -3,7 +3,7 @@
 using namespace std;
 
 // cses shortest distance - 1
- 
+// one direction only 
 vector<int> dijkstra(vector<vector<pair<int,int>>>& adj, int source) {
     int n = adj.size();
     priority_queue<pair<int,int>> q;
@@ -42,6 +42,7 @@ signed main() {
         int x, y, z;
         cin >> x >> y >> z;
         adj[x].push_back({y, z});
+        adj[y].push_back({x, z});
     }
     int source = 1, target = n;
     // cin >> source >> target;
