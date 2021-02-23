@@ -8,7 +8,7 @@ int countofsubsetsum(vector<int>& v, int sum) {
     for (int j=1; j<=n; j++) dp[0][j] = 0;
     for (int i=1; i<=n; i++) {
         for (int j=1; j<=sum; j++) {
-            if (v[i-1] <= sum) dp[i][j] = dp[i-1][j-v[i-1]] + dp[i-1][j];
+            if (v[i-1] <= j) dp[i][j] = dp[i-1][j-v[i-1]] + dp[i-1][j];
             else dp[i][j] = dp[i-1][j];
         }
     }
