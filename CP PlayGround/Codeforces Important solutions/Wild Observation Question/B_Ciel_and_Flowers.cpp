@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+#define ll long long int
+#define pb push_back
+#define mp make_pair
+#define mt make_tuple
+#define pp pop_back
+#define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
+#define printvec(x) for(int _=0;_<x.size();_++){cout<<x[_]<<' ';}cout<<'\n';
+#define printvvec(x) for(int _=0;_<x.size();_++){for(int __=0;__<x[_].size(); __++){cout<<x[_][__]<<' ';}cout<<'\n';}
+#define printmap(x) for(auto _=x.begin();_!=x.end();_++){cout<<_->first<<' '<<_->second<<'\n';}
+#define printset(x) for(auto _=x.begin();_!=x.end();_++){cout<<*_<<' ';}cout<<'\n';
+#define printvecp(x) for(int _=0;_<x.size();_++){cout<<x[_].first<<' '<<x[_].second<<'\n';}
+#define printp(x) cout<<x.first<<' '<< x.second<<'\n';
+#define fo(i,start,end) int i=start;i<end;i++
+#define foi(i,start,end) int i=start;i<=end;i++
+#define fot(it, x) auto it=x.begin();it!=x.end();it++
+#define invec(v, n) for(int i=0;i<v.size();i++)cin>>v[i];
+using namespace std;
+
+// min-heap
+class comp{
+public:
+    bool operator() (int& a, int& b) {
+        return a > b;
+    }
+};
+
+// sort pair
+bool comp1(pair<int,int> a, pair<int,int> b) {
+    return(a.second < b.second);
+}
+
+// string to int
+int string_to_int(string s) {
+    stringstream a(s);
+    int x;
+    a >> x;
+    return x;
+}
+
+// gcd
+int gcd(int a, int b) {
+    if (b == 0) return a;
+    int temp = gcd(b, a%b);
+    return temp;
+}
+
+void conquer() {
+    int __=1;
+    // cin >> __;
+    // int google_contest_count = 0;
+    while(__--) {
+        int r, g, b;
+        cin >> r >> g >> b;
+        if (r > 2 && g > 2 && b > 2) {
+            int mix1 = 1 + (r-1)/3 + (g-1)/3 + (b-1)/3;
+            int mix2 = 2 + (r-2)/3 + (g-2)/3 + (b-2)/3;
+            cout << max(max(mix1,  mix2), r/3+g/3+b/3) << "\n";
+        } 
+        else cout << r/3+g/3+b/3 << "\n";
+        // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    
+    #ifndef ONLINE_JUDGE
+        //freopen("in", "r", stdin);
+        //freopen("out", "w", stdout);
+    #endif
+    
+    conquer();
+    
+    return 0;
+}
