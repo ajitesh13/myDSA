@@ -1,0 +1,2 @@
+a composite number is always divisible by 
+either 2 same primes or 2 different primes

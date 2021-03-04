@@ -47,32 +47,11 @@ int gcd(int a, int b) {
 }
 
 void conquer() {
-    int __=1;
-    // cin >> __;
+    int __;
+    cin >> __;
     // int google_contest_count = 0;
     while(__--) {
-        int n;
-        cin >> n;
-        int s23, s13, s12;
-        vector<int> res(n+1);
-        cout << "? 1 3" << endl;
-        cin >> s13;
-        cout << "? 2 3" << endl;
-        cin >> s23;
-        res[1] = s13-s23;
-        cout << "? 1 2" << endl;
-        cin >> s12;
-        res[2] = s12 - res[1];
-        res[3] = s23 - res[2];
-        for (int i=4; i<=n; i++) {
-            int sum;
-            cout << "? " << i-1 << " " << i << endl;
-            cin >> sum;
-            res[i] = sum-res[i-1];
-        }
-        cout << "! ";
-        for (int i=1; i<=n; i++) cout << res[i] << " ";
-        cout << endl;
+        
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }

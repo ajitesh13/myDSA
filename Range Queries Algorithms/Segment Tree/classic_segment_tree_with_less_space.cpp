@@ -23,21 +23,21 @@ int query(int l, int r) {  // sum on interval [l, r)
 
 int main() {
 
-    #ifndef ONLINE_JUDGE
-        freopen("in", "r", stdin);
-    #endif
-    scanf("%d", &n);
-    for (int i = 0; i < n; ++i) scanf("%d", &t[n+i]);
-    build();
-    for (int i=n; i<2*n; i++) {
-        cout << t[i] << ' ';
-    }
-    modify(2, t[n+2]+3); // incrementing the 2nd index by 3 and 0 based indexing
-    cout << endl;
-    for (int i=n; i<2*n; i++) {
-        cout << t[i] << ' ';
-    }
-    cout << endl;
-    cout << query(3,5) << '\n'; // sum on interval [l, r) and 0 based indexing
-    return 0;
+  #ifndef ONLINE_JUDGE
+      freopen("in", "r", stdin);
+  #endif
+  scanf("%d", &n);
+  for (int i = 0; i < n; ++i) scanf("%d", &t[n+i]);
+  build();
+  for (int i=n; i<2*n; i++) {
+      cout << t[i] << ' ';
+  }
+  modify(2, t[n+2]+3); // incrementing the 2nd index by 3 and 0 based indexing
+  cout << endl;
+  for (int i=n; i<2*n; i++) {
+      cout << t[i] << ' ';
+  }
+  cout << endl;
+  cout << query(3,5) << '\n'; // sum on interval [l, r) and 0 based indexing
+  return 0;
 }
