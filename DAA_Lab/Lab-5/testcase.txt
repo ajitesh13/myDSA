@@ -1,4 +1,0 @@
-Binomial Cofficient :- nCr = 20C7
-Egyptian Fraction :- 71/100, 131/200
-Coin Change :- S={1,2,5,10,20,50,100} n1=420 n2=343 n3=29
-

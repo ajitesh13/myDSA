@@ -20,8 +20,6 @@ int retmin(int v, int tl, int tr, int l, int r) {
         return t[v];
     }
     int tm = (tl + tr) / 2;
-    cout << retmin(v*2, tl, tm, l, min(r, tm)) << "\n";
-    cout << retmin(v*2+1, tm+1, tr, max(l, tm+1), r) << "\n";
     return min(retmin(v*2, tl, tm, l, min(r, tm)),retmin(v*2+1, tm+1, tr, max(l, tm+1), r));
 }
 
@@ -51,9 +49,9 @@ int main() {
     for (int i=0; i<n; i++) cin >> v[i];
     t.assign(4*n, INT32_MAX);
     build(v, 1, 0, n-1);
-    for (int i=0; i<t.size(); i++) cout << t[i] << " ";
-    cout << endl;
-    cout << retmin(1,0,n-1,0,1) << "\n";
+    int l = 3, r = 5;
+    cout << retmin(1,0,n-1,l-1,r-1) << "\n";
+    update(1, 0, n-1, 2, 3);
 
     
     return 0;
