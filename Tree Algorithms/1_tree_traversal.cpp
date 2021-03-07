@@ -27,7 +27,7 @@ int main() {
         adj[x].push_back(y); // only single time addition
     }
     dfs(1, 0); // if starting dfs from node 1
-    // dfs(0, -1); // if starting dfs from node 
+    // dfs(0, -1); // if starting dfs from node 0
     
     return 0;
 }
