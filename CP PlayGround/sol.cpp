@@ -1,84 +1,29 @@
 #include <bits/stdc++.h>
-#define ll long long int
-#define pb push_back
-#define mp make_pair
-#define mt make_tuple
-#define pp pop_back
-#define all(x) x.begin(), x.end()
-#define rall(x) x.rbegin(), x.rend()
-#define printvec(x) for(int _=0;_<x.size();_++){cout<<x[_]<<' ';}cout<<'\n';
-#define printvvec(x) for(int _=0;_<x.size();_++){for(int __=0;__<x[_].size(); __++){cout<<x[_][__]<<' ';}cout<<'\n';}
-#define printmap(x) for(auto _=x.begin();_!=x.end();_++){cout<<_->first<<' '<<_->second<<'\n';}
-#define printset(x) for(auto _=x.begin();_!=x.end();_++){cout<<*_<<' ';}cout<<'\n';
-#define printvecp(x) for(int _=0;_<x.size();_++){cout<<x[_].first<<' '<<x[_].second<<'\n';}
-#define printp(x) cout<<x.first<<' '<< x.second<<'\n';
-#define fo(i,start,end) int i=start;i<end;i++
-#define foi(i,start,end) int i=start;i<=end;i++
-#define fot(it, x) auto it=x.begin();it!=x.end();it++
-#define invec(v, n) for(int i=0;i<v.size();i++)cin>>v[i];
+#define int long long
+using pii=std::pair<int,int>;
 using namespace std;
-
-// min-heap
-class comp{
-public:
-    bool operator() (int& a, int& b) {
-        return a > b;
-    }
-};
-
-// sort pair
-bool comp1(pair<int,int> a, pair<int,int> b) {
-    return(a.second < b.second);
-}
-
-// string to int
-int string_to_int(string s) {
-    stringstream a(s);
-    int x;
-    a >> x;
-    return x;
-}
-
-vector<int> dp;
-
-int fibb(int n) {
-    if (dp[n] != -1) {
-        return dp[n];
-    } else {
-        if (n == 0) {
-            return dp[n] = 0;
-        } else if (n == 1) {
-            return dp[n] = 1;
-        } else {
-            return dp[n] = fibb(n-1) + fibb(n-2);
-        }
-    }
-}
-
-void solve() {
-    int __;
-    cin >> __;
-    // int google_contest_count = 0;    
-    while(__--) {
-        int n;
-        cin >> n;
-        dp.assign(n+1, -1);
-        cout << fibb(n) << '\n';
-        // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
-    }
-}
-
-int main() {
-    ios_base::sync_with_stdio(0);
+ 
+const int maxn = 3e5 + 5;
+ 
+int t, n, a[maxn];
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
     cin.tie(0);
-    cout.tie(0);
-    
-    #ifndef ONLINE_JUDGE
-        //freopen("in", "r", stdin);
-        // freopen("out", "w", stdout);
-    #endif
-    
-    solve();
-    
+    cin >> t;
+    for(int cases = 0; cases < t; cases++)
+    {
+        cin >> n;
+        for(int i = 0; i < n; i++)
+            cin >> a[i];
+        int good = 0;
+        for(int i = 1; i < n; i++)
+            if(a[i] > a[i - 1])
+                good = 1;
+        if(good)
+            cout << "Yes\n";
+        else
+            cout << "No\n";
+    }
     return 0;
-}
+} 
