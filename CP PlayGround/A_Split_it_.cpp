@@ -46,35 +46,34 @@ int gcd(int a, int b) {
     return temp;
 }
 
-int cal(int m, int start, int dest) {
-    int res = 0;
-    while (start != dest) {
-        // cout << start << " " << dest << "\n";
-        start++;
-        if (start == m+1) {
-            start = 1;
-        }
-        res++;
+bool checkpal(string s) {
+    int i = 0, j = s.size()-1;
+    bool res = true;
+    while (i <= j) {
+        if (s[i] != s[j]) res = false;
+        i++;
+        j--;
     }
-    // cout << res << "\n";
     return res;
 }
 
 void virya() {
-    int __=1;
-    // cin >> __;
+    int __;
+    cin >> __;
     // int google_contest_count = 0;
     while(__--) {
-        int m, n;
-        cin >> m >> n;
-        vector<int> v(n);
-        for (int i=0; i<n; i++) cin >> v[i];
-        int res = 0;
-        res += cal(m, 1, v[0]);
-        for (int i=0; i<n-1; i++) {
-            res += cal(m, v[i], v[i+1]);
+        int n, k;
+        cin >> n >> k;
+        string s;
+        cin >> s;
+        bool res = false;
+        if (checkpal(s)) {
+            if (n >= 2*k+1) {
+                res = true;
+            }
         }
-        cout << res << "\n";
+        if (res || k == 0) cout << "YES\n";
+        else cout << "NO\n";
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
 }
