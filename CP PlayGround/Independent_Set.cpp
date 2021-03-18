@@ -46,36 +46,23 @@ int gcd(int a, int b) {
     return temp;
 }
 
+int n, e;
 vector<vector<int>> adj;
-vector<int> visited;
-int clash1 = 0, clash2 = 0;
-
-void bfs(int source) {
-    queue<int> q;
-    q.push(source);
-    visited[source] = -1;
-    while (!q.empty()) {
-        int top = q.front();
-        q.pop();
-        for (int i: adj[top]) {
-            if (visited[i] == 0) {
-                if (visited[top] == -1) visited[i] = -2;
-                q.push(i);
-            } else if (visited[i] == -1) {
-                if (visited[top] == -1) clash1 = 1;
-            } else {
-                if (visited[top] == -2) clash2 = 1;
-            }
-        }
+map<vector<int>,vector<int>> mp1;
+void go(int s) {
+    vector<int> a, b;
+    a.pb(s);
+    for (int i=0; i<adj[s].size(); i++) b.pb(adj[s][i]);
+    for (int i=1; i<=n; i++) {
+        int c1 = 0;
+        
     }
 }
-
 void virya() {
     int __;
     cin >> __;
     // int google_contest_count = 0;
     while(__--) {
-        int n, e;
         cin >> n >> e;
         adj.assign(n+1, vector<int> ());
         for (int i=0; i<e; i++) {
@@ -84,45 +71,8 @@ void virya() {
             adj[x].pb(y);
             adj[y].pb(x);
         }
-        visited.assign(n+1, 0);
-        bfs(1);
-        for (int i=0; i<=n; i++) {
-            cout << i << ": ";
-            for (int j=0; j<adj[i].size(); j++) {
-                cout << adj[i][j] << " ";
-            }
-            cout << "\n";
-        }
-        if (clash1 == 1 && clash2 == 1) {
-            cout << 0 << "\n";
-            for (int i=0; i<n; i++) {
-                cout << 0;
-            }
-            cout << "\n";
-        } else if (clash1 == 1 && clash2 == 0) {
-            cout << 1 << "\n";
-            for (int i=1; i<visited.size(); i++) {
-                if (visited[i] == -1) {
-                    cout << 0 << " ";
-                } else cout << 1 << " ";
-            } 
-            cout << "\n";
-        } else if (clash1 == 0 && clash2 == 1) {
-            cout << 1 << "\n";
-            for (int i=1; i<visited.size(); i++) {
-                if (visited[i] == -2) {
-                    cout << 0 << " ";
-                } else cout << 1 << " ";
-            } 
-            cout << "\n";
-        } else {
-            cout << 2 << "\n";
-            for (int i=1; i<visited.size(); i++) {
-                if (visited[i] == -1) {
-                    cout << 0 << " ";
-                } else cout << 1 << " ";
-            } 
-            cout << "\n";
+        for (int i=1; i<=1; i++) {
+            go(i);
         }
         // cout << "Case #" << (google_contest_count+1) << ": ";google_contest_count++;
     }
