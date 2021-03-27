@@ -1,15 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int lcs(string a, int n, string b, int m) {
-    if (n == 0 || m == 0) return 0;
-    else {
-        if (a[n-1] == b[m-1]) {
-            return 1 + lcs(a,n-1,b,m-1);
-        } else {
-            return max(lcs(a,n-1,b,m),lcs(a,n,b,m-1));
-        }
-    }
+int lcs(string text1, int n, string text2, int m) {
+    if (n == 0 || m == 0) 
+        return 0;
+    if (text1[n-1] == text2[m-1]) 
+        return 1 + lcs(text1, n-1, text2, m-1);
+    else 
+        return max(lcs(text1, n, text2, m-1), lcs(text1, n-1, text2, m));
 }
 
 int main() {
@@ -21,7 +19,7 @@ int main() {
     string b = "bacac";
     int n = a.size();
     int m = b.size();
-    cout << lcs(a,n-1,b,m-1) << "\n";
+    cout << lcs(a,n,b,m) << "\n";
     
     return 0;
 }
