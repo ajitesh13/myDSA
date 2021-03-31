@@ -1,17 +1,17 @@
 #include <bits/stdc++.h>
-#define int long long
-using pii=std::pair<int,int>;
 using namespace std;
- 
-const int maxn = 3e5 + 5;
- 
-int t, n, a[maxn];
-int32_t main()
-{
+
+int main() {
+
     ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cin >> t;
+    cin.tie(NULL);
     
+    set<int> st = {1,2,3,4,5};
+    auto it = st.end();
+    while (it != st.begin()) {
+        it--;
+        cout << *it << " ";
+    }
     
     return 0;
-} 
+}
