@@ -48,38 +48,22 @@ int gcd(int a, int b) {
 
 void virya() {
     int __ = 1;
-    // cin >> __;
+    cin >> __;
     while(__--) {
-        int n, m;
-        cin >> n >> m;
-        vector<int> v(n+1, 0);
-        vector<pair<int,int>> vp;
-        for (int i=0; i<m; i++) {
-            int x, y;
-            cin >> x >> y;
-            while (x != y) {
-                vp.pb({x, y});
-                x++;
-            }
-            vp.pb({x,y});
+        int n;
+        cin >> n;
+        vector<int> v(n);
+        unordered_map<int,int> ump;
+        unordered_map<int,int> ump1;
+        for (int i=0; i<n; i++) {
+            cin >> v[i];
+            ump[v[i]]++;
+            if (ump[v[i]] == 1) {
+                ump1.insert({v[i], i+1});
+            } else ump1.erase(v[i]);
         }
-        for (int i=0; i<vp.size(); i++) {
-            v[vp[i].first] += 1;
-            if (vp[i].second+1 <= n) {
-                v[vp[i].second+1] += -1;
-            }
-        }
-        for (int i=2; i<=n; i++) {
-            v[i] += v[i-1];
-        }
-        int q;
-        cin >> q;
-        while (q--) {
-            int x;
-            cin >> x;
-            cout << v[x] << "\n";
-        }
-        // printvecp(vp);
+        auto it = ump1.begin();
+        cout << it->second << "\n";
     }
 }
 
