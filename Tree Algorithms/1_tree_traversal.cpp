@@ -24,7 +24,8 @@ int main() {
     for (int i=1; i<=e; i++) {
         int x, y;
         cin >> x >> y;
-        adj[x].push_back(y); // only single time addition
+        adj[x].push_back(y); 
+        adj[y].push_back(x);
     }
     dfs(1, 0); // if starting dfs from node 1
     // dfs(0, -1); // if starting dfs from node 0
