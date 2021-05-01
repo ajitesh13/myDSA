@@ -52,6 +52,7 @@ void dfs(int s, int e) {
         if (i != e) dfs(i,s);
     }
 }
+
 void best() {
     int __ = 1;
     // cin >> __;
@@ -68,7 +69,7 @@ void best() {
 
         dfs(1,0);
         // cout << "\n";
-    }
+    }   
 }
 
 int main() {

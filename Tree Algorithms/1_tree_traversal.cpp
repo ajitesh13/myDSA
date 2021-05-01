@@ -15,12 +15,10 @@ int main() {
 
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    freopen("in", "r", stdin);
     
     int n, e;
     cin >> n >> e;
-    adj.assign(n+1, vector<int> ());
+    adj.resize(n+1);
     for (int i=1; i<=e; i++) {
         int x, y;
         cin >> x >> y;
