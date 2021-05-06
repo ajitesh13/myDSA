@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n;
+int n, e;
 
 vector<int> bellmanford(int source, vector<tuple<int,int,int>> edges) {
     vector<int> distance(n, INT32_MAX);
@@ -25,7 +25,6 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int e;
     cin >> n >> e;
     vector<tuple<int,int,int>> edges;
     for (int i=0; i<e; i++) {
