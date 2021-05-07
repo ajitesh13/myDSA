@@ -17,7 +17,7 @@ int main() {
     for (int k=0; k<n; k++) {
         for (int i=0; i<n; i++) {
             for (int j=0; j<n; j++) {
-                if (i == k || j == k || i == k || v[i][k] == INT_MAX || v[k][j] == INT_MAX) {
+                if (i == k || j == k || v[i][k] == INT_MAX || v[k][j] == INT_MAX) {
                     continue;
                 }
                 v[i][j] = min(v[i][j], v[i][k] + v[k][j]);

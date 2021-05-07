@@ -46,43 +46,43 @@ int gcd(int a, int b) {
     return temp;
 }
 
-int n, e;
-vector<vector<pair<int,int>>> adj;
-vector<int> dist;
-vector<int> visited;
-void dijkstra(int source) {
-    priority_queue<pair<int,int>> pq;
-    pq.push({0, source});
-    dist[source] = 0;
-    while (!pq.empty()) {
-        int top = pq.top().second;
-        pq.pop();
-        if (!visited[top]) {
-            visited[top] = true;
-            for (auto i: adj[top]) {
-                int b = i.first;
-                int w = i.second;
-                dist[b] = min(dist[b], dist[top]+w);
-                pq.push({-dist[b], b});
-            }
-        }
-    }
-} 
+int n, e, q;
+int mx = INT64_MAX;
 void best() {
     int __ = 1;
     // cin >> __;
     while(__--) {
-        cin >> n >> e;
-        adj.resize(n+1);
-        dist.assign(n+1, INT64_MAX);
-        visited.assign(n+1, false);
+        cin >> n >> e >> q;
+        vector<vector<int>> v(n, vector<int> (n, mx));
         for (int i=0; i<e; i++) {
             int x, y, z;
             cin >> x >> y >> z;
-            adj[x].pb({y,z});
+            v[x-1][y-1] = z;
+            v[y-1][x-1]= z;
         }
-        dijkstra(1);
-        for (int i=1; i<dist.size(); i++) cout << dist[i] << " ";
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<n; j++) {
+                if (i == j) v[i][j] = 0;
+            }
+        }
+        for (int k=0; k<n; k++) {
+            for (int i=0; i<n; i++) {
+                for (int j=0; j<n; j++) {
+                    if (i == k || j == k || v[i][k] == mx || v[k][j] == mx) {
+                        continue;
+                    }
+                    v[i][j] = min(v[i][j], v[i][k] + v[k][j]);
+                }
+            }
+        }
+        while (q--) {
+            int x, y;
+            cin >> x >> y;
+            x -= 1;
+            y -= 1;
+            if (v[x][y] == mx) cout << -1 << "\n";
+            else cout << v[x][y] << "\n";
+        }
     }
 }
 
