@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, e;
+int n, e, neg_cycle = 0;
 
 vector<int> bellmanford(int source, vector<tuple<int,int,int>> edges) {
-    vector<int> distance(n, INT32_MAX);
+    vector<int> distance(n+1, INT32_MAX);
     distance[source] = 0;
-    for (int i=1; i<=(n-1); i++) {
+    for (int i=1; i<=n; i++) {
         for (auto e: edges) {
             int u = get<0>(e);
             int v = get<1>(e);
@@ -13,9 +13,12 @@ vector<int> bellmanford(int source, vector<tuple<int,int,int>> edges) {
             if (distance[u] == INT32_MAX) {
                 continue;
             } else {
-                distance[v] = min(distance[v], distance[u]+w);
+                if (distance[v] > distance[u] + w) {
+                    distance[v] = distance[u] + w;
+                    if (i == n) neg_cycle = 1;
+                }
             }
-        }
+        } 
     }
     return distance;
 }
@@ -35,11 +38,13 @@ int main() {
     int source;
     cin >> source;
     vector<int> distance = bellmanford(source, edges);
-    for (int i=0; i<distance.size(); i++) {
-        cout << distance[i] << ' ';
+    if (neg_cycle == 1) cout << "Negative Cycle\n";
+    else {
+        for (int i=1; i<distance.size(); i++) {
+            cout << distance[i] << ' ';
+        }
+        cout << "\n";
     }
-    cout << endl;
 
-    
     return 0;
 }
