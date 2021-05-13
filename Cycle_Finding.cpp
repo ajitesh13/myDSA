@@ -46,24 +46,21 @@ int gcd(int a, int b) {
     return temp;
 }
 
-int n, e, neg_cycle = 0;
+int n, e, x;
 vector<tuple<int,int,int>> edge;
 vector<int> dist;
-
+vector<int> parent;
 void bellmanford() {
-    dist[1] = 0;
     for (int i=1; i<=n; i++) {
+        x = -1;
         for (auto e: edge) {
             int u = get<0>(e);
             int v = get<1>(e);
             int w = get<2>(e);
-            if (dist[u] == INT32_MAX) {
-                continue;
-            } else {
-                if (dist[v] > dist[u] + w) {
-                    dist[v] = dist[u] + w;
-                    if (i == n) neg_cycle = 1;
-                }
+            if (dist[v] > dist[u] + w) {
+                dist[v] = dist[u] + w;
+                parent[v] = u;
+                x = v;
             }
         }
     }
@@ -73,20 +70,31 @@ void best() {
     // cin >> __;
     while(__--) {
         cin >> n >> e;
-        dist.assign(n+1, INT32_MAX);
+        dist.assign(n+1, 0);
+        parent.assign(n+1, -1);
         for (int i=0; i<e; i++) {
             int x, y, z;
             cin >> x >> y >> z;
-            edge.pb({x,y,-z});
+            edge.pb({x,y,z});
         }
         bellmanford();
-        cont(z,dist);
-        if (neg_cycle) {
-            cout << -1 << "\n";
+        if (x == -1) {
+            cout << "NO\n";
         } else {
-            cout << -dist[n] << "\n";
+            cout << "YES\n";
+            for (int i=1; i<=n; i++) {
+                x = parent[x];
+            }
+            vector<int> res;
+            for (int i=x;; i = parent[i]) {
+                res.pb(i);
+                if (i == x and res.size() > 1) {
+                    break;
+                }
+            }
+            reverse(all(res));
+            cont(z,res);
         }
-
     }
 }
 
