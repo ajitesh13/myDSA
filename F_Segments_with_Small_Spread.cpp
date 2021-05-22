@@ -17,6 +17,10 @@ using namespace std;
 #define fot(it, x) auto it=x.begin();it!=x.end();it++
 #define printadj(n,x) for (int i=0; i<n; i++) {cout<<i<<": ";for(int j=0;j<x[i].size();j++){cout<<adj[i][j]<<' ';}cout<<'\n';}
 #define int long long int
+#define fo(i,start,end) int i=start;i<end;i++
+#define foi(i,start,end) int i=start;i<=end;i++
+#define fot(it, x) auto it=x.begin();it!=x.end();it++
+#define invec(v, n) for(int i=0;i<v.size();i++)cin>>v[i];
 
 // min-heap
 class comp{
@@ -39,62 +43,75 @@ int string_to_int(string s) {
     return x;
 }
 
-// gcd
-int gcd(int a, int b) {
-    if (b == 0) return a;
-    int temp = gcd(b, a%b);
-    return temp;
+int n, k;
+struct stack {
+
+    vector<int> s, smin = {LLONG_MAX}, smax = {LLONG_MIN};
+    void push(int x) {
+        s.pb(x);
+        smin.pb(::min(smin.back(), x));
+        smax.pb(::max(smax.back(), x));
+    }
+
+    int pop() {
+        int res = s.back();
+        s.pop_back();
+        smin.pop_back();
+        smax.pop_back();
+        return res;
+    }
+
+    bool empty() {
+        return s.empty();
+    }
+
+    int min() {
+        return smin.back();
+    }
+
+    int max() {
+        return smax.back();
+    }
+};
+
+::stack s1, s2;
+
+void add(int x) {
+    s2.push(x);
 }
 
-int n, e, x;
-vector<tuple<int,int,int>> edge;
-vector<int> dist;
-vector<int> parent;
-void bellmanford() {
-    for (int i=1; i<=n; i++) {
-        x = -1;
-        for (auto e: edge) {
-            int u = get<0>(e);
-            int v = get<1>(e);
-            int w = get<2>(e);
-            if (dist[v] > dist[u] + w) {
-                dist[v] = dist[u] + w;
-                parent[v] = u;
-                x = v;
-            }
+void remove() {
+    if (s1.empty()) {
+        while (!s2.empty()) {
+            s1.push(s2.pop());
         }
     }
+    s1.pop();
 }
+
+bool good() {
+    int mn = min(s1.min(), s2.min());
+    int mx = max(s1.max(), s2.max());
+    return mx - mn <= k;
+}
+
 void best() {
     int __ = 1;
     // cin >> __;
     while(__--) {
-        cin >> n >> e;
-        dist.assign(n+1, 0);
-        parent.assign(n+1, -1);
-        for (int i=0; i<e; i++) {
-            int x, y, z;
-            cin >> x >> y >> z;
-            edge.pb({x,y,z});
-        }
-        bellmanford();
-        if (x == -1) {
-            cout << "NO\n";
-        } else {
-            cout << "YES\n";
-            for (int i=1; i<=n; i++) {
-                x = parent[x];
+        cin >> n >> k;
+        vector<int> v(n);
+        for (int i=0; i<n; i++) cin >> v[i];
+        int l = 0, res = 0;
+        for (int r=0; r<n; r++) {
+            add(v[r]);
+            while (!good()) {
+                remove();
+                l++;
             }
-            vector<int> res;
-            for (int i=x;; i = parent[i]) {
-                res.pb(i);
-                if (i == x and res.size() > 1) {
-                    break;
-                }
-            }
-            reverse(all(res));
-            cont(z,res);
+            res += r - l + 1;
         }
+        cout << res << "\n";
     }
 }
 
