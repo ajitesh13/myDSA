@@ -1,36 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n;
-vector<vector<int>> adj;
-vector<pair<int,int>> bridge;
-vector<bool> visited;
-vector<int> tin, low;
-int timer;
 
-void dfs(int v, int p = -1) {
-    visited[v] = true;
-    tin[v] = low[v] = timer++;
-    for (int to : adj[v]) {
-        if (to == p) continue;
-        if (visited[to]) {
-            low[v] = min(low[v], tin[to]);
+void dfs(int node, int parent, vector<int>& vis, vector<int>& tin, 
+        vector<int>& low, int& timer, vector<vector<int>>& adj) {
+    
+    vis[node] = 1;
+    tin[node] = low[node] = timer++;
+    for (auto it: adj[node]) {
+        if (it == parent) continue;
+        
+        if (!vis[it]) {
+            dfs(it,node,vis,tin,low,timer,adj);
+            low[node] = min(low[node], low[it]);
+            if (low[it] > tin[node]) {
+                cout << node << " " << it << "\n";
+            }
         } else {
-            dfs(to, v);
-            low[v] = min(low[v], low[to]);
-            if (low[to] > tin[v])
-                bridge.push_back({v, to});
+            low[node] = min(low[node], tin[it]);
         }
-    }
-}
-
-void find_bridges() {
-    timer = 0;
-    visited.assign(n, false);
-    tin.assign(n, -1);
-    low.assign(n, -1);
-    for (int i = 0; i < n; ++i) {
-        if (!visited[i])
-            dfs(i);
     }
 }
 
@@ -39,19 +26,24 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int e;
-    cin >> n >> e;
-    adj.assign(n+1, vector<int> ());
-    for (int i=0; i<e; i++) {
-        int x, y;
-        cin >> x >> y;
-        adj[x].push_back(y);
-        adj[y].push_back(x);
+    int n, m;
+    cin >> n >> m;
+    vector<vector<int>> adj(n+1);
+    for (int i=0; i<m; i++) {
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
-    for (int i=0; i<)
-    find_bridges();
-    for (int i=0; i<bridge.size(); i++) {
-        cout << bridge[i].first << ' ' << bridge[i].second << '\n';
+
+    vector<int> tin(n+1, -1);
+    vector<int> low(n+1, -1);
+    vector<int> vis(n+1, 0);
+    int timer = 0;
+    for (int i=1; i<=n; i++) {
+        if (!vis[i]) {
+            dfs(i, -1, vis, tin, low, timer, adj);
+        }
     }
     
     return 0;

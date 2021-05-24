@@ -1,43 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n;
-vector<vector<int>> adj;
-vector<bool> articulation_point;
-vector<bool> visited;
-vector<int> tin, low;
-int timer;
 
-void dfs(int v, int p = -1) {
-    visited[v] = true;
-    tin[v] = low[v] = timer++;  
-    int children=0;
-    for (int to : adj[v]) {
-        if (to == p) continue;
-        if (visited[to]) {
-            low[v] = min(low[v], tin[to]);
+void dfs(int node, int parent, vector<int>& vis, vector<int>& tin, vector<int>& low, 
+        int& timer, vector<vector<int>>& adj, vector<int>& isArticulation) {
+    
+    vis[node] = 1;
+    tin[node] = low[node] = timer++;
+    int child = 0;
+    for (auto it: adj[node]) {
+        if (it == parent) continue;
+
+        if (!vis[it]) {
+            dfs(it, node, vis, tin, low, timer, adj, isArticulation);
+            low[node] = min(low[node], low[it]);
+            if (low[it] >= tin[node] and parent != -1) {
+                isArticulation[node] = 1;
+            }
         } else {
-            dfs(to, v);
-            low[v] = min(low[v], low[to]);
-            if (low[to] >= tin[v] && p!=-1)
-                articulation_point[v] = true;
-            ++children;
+            low[node] = min(low[node], tin[it]);
         }
     }
-    if(p == -1 && children > 1) {
-        articulation_point[v] = true;
-    }
-        
-}
 
-void find_cutpoints() {
-    timer = 0;
-    visited.assign(n, false);
-    tin.assign(n, -1);
-    low.assign(n, -1);
-    articulation_point.assign(n, false);
-    for (int i = 0; i < n; ++i) {
-        if (!visited[i])
-            dfs (i);
+    if (parent == -1 and child > 1) {
+        isArticulation[node] = 1;
     }
 }
 
@@ -46,22 +31,30 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int e;
-    cin >> n >> e;
-    adj.assign(n+1, vector<int> ());
-    for (int i=0; i<e; i++) {
-        int x, y;
-        cin >> x >> y;
-        adj[x].push_back(y);
-        adj[y].push_back(x);
+    int n, m;
+    cin >> n >> m;
+    vector<vector<int>> adj(n+1);
+    for (int i=0; i<m; i++) {
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
-    find_cutpoints();
-    for (int i=0; i<n; i++) {
-        if (articulation_point[i]) {
-            cout << i << ' ';
+
+    vector<int> tin(n+1, -1);
+    vector<int> low(n+1, -1);
+    vector<int> vis(n+1, 0);
+    vector<int> isArticulation(n+1, 0);
+    int timer = 0;
+    for (int i=1; i<=n; i++) {
+        if (!vis[i]) {
+            dfs(i,-1,vis,tin,low,timer,adj,isArticulation);
         }
     }
-    cout << endl;
+
+    for (int i=1; i<=n; i++) {
+        if (isArticulation[i] == 1) cout << i << " ";
+    }
     
     return 0;
 }
