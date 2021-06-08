@@ -43,75 +43,31 @@ int string_to_int(string s) {
     return x;
 }
 
-int n, k;
-struct stack {
-
-    vector<int> s, smin = {LLONG_MAX}, smax = {LLONG_MIN};
-    void push(int x) {
-        s.pb(x);
-        smin.pb(::min(smin.back(), x));
-        smax.pb(::max(smax.back(), x));
-    }
-
-    int pop() {
-        int res = s.back();
-        s.pop_back();
-        smin.pop_back();
-        smax.pop_back();
-        return res;
-    }
-
-    bool empty() {
-        return s.empty();
-    }
-
-    int min() {
-        return smin.back();
-    }
-
-    int max() {
-        return smax.back();
-    }
-};
-
-::stack s1, s2;
-
-void add(int x) {
-    s2.push(x);
-}
-
-void remove() {
-    if (s1.empty()) {
-        while (!s2.empty()) {
-            s1.push(s2.pop());
-        }
-    }
-    s1.pop();
-}
-
-bool good() {
-    int mn = min(s1.min(), s2.min());
-    int mx = max(s1.max(), s2.max());
-    return mx - mn <= k;
-}
-
+int mod = 1000000007;
+vector<vector<int>> dp;
 void best() {
     int __ = 1;
     // cin >> __;
     while(__--) {
-        cin >> n >> k;
+        int n, sum;
+        cin >> n >> sum;
         vector<int> v(n);
-        for (int i=0; i<n; i++) cin >> v[i];
-        int l = 0, res = 0;
-        for (int r=0; r<n; r++) {
-            add(v[r]);
-            while (!good()) {
-                remove();
-                l++;
-            }
-            res += r - l + 1;
+        for (int i=0; i<n; i++) {
+            cin >> v[i];
         }
-        cout << res << "\n";
+        sort(all(v));
+        dp.assign(n+1, vector<int> (sum+1, 0));
+        for (int i=0; i<=n; i++) {
+            dp[i][0] = 1;
+        }
+        for (int i=1; i<=n; i++) {
+            for (int j=1; j<=sum; j++) {
+                if (v[i-1] <= j) {
+                    dp[i][j] = (dp[i-1][j]%mod + dp[i][j-v[i-1]]%mod)%mod;
+                } else dp[i][j] = dp[i-1][j];
+            }
+        }
+        cout << dp[n][sum] << "\n";
     }
 }
 

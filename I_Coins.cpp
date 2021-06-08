@@ -16,7 +16,7 @@ using namespace std;
 #define foi(i,start,end) int i=start;i<=end;i++
 #define fot(it, x) auto it=x.begin();it!=x.end();it++
 #define printadj(n,x) for (int i=0; i<n; i++) {cout<<i<<": ";for(int j=0;j<x[i].size();j++){cout<<adj[i][j]<<' ';}cout<<'\n';}
-#define int long long int
+//#define int long long int
 #define fo(i,start,end) int i=start;i<end;i++
 #define foi(i,start,end) int i=start;i<=end;i++
 #define fot(it, x) auto it=x.begin();it!=x.end();it++
@@ -43,51 +43,45 @@ int string_to_int(string s) {
     return x;
 }
 
+int n;
+vector<double> v;
+double res = 0.0;
+void go(string s, int th, int tl, double preans) {
+    // cout << s << " " << preans << "\n";
+    res += preans;
+    if (th - 1 > tl + 1) {
+        for (int i=0; i<s.size(); i++) {
+            string s1 = s;
+            double preans1 = preans;
+            if (s[i] != 'T') {
+                s1[i] = 'T';
+                preans1 /= v[i];
+                go(s1,th-1,tl+1,preans1*(1-v[i]));
+            }
+        }
+    }
+}
 void best() {
     int __ = 1;
-    cin >> __;
+    // cin >> __;
     while(__--) {
-        int n;
         cin >> n;
-        vector<int> v(n);
+        v.resize(n);
+        double preans = 1.0;
         for (int i=0; i<n; i++) {
             cin >> v[i];
+            preans *= v[i];
         }
-        set<int> st;
-        stack<int> s;
-        s.push(v[0]);
-        for (int i=1; i<n; i++) {
-            if (s.empty()) {
-                s.push(v[i]);
-                continue;
-            }
-
-            while (!s.empty() and s.top() <= v[i]) {
-                st.insert(v[i] - s.top());
-                s.pop();
-            }
-            s.push(v[i]);
+        string s;
+        for (int i=0; i<n; i++) {
+            s.pb('H');
         }
-        stack<int> s1;
-        s1.push(v[n-1]);
-        for (int i=n-2; i>=0; i--) {
-            if (s1.empty()) {
-                s1.push(v[i]);
-                continue;
-            }
-
-            while (!s1.empty() and s1.top() <= v[i]) {
-                st.insert(v[i] - s1.top());
-                s1.pop();
-            }
-            s1.push(v[i]);
-        }
-        // cont(z,st);
-        cout << st.size() << "\n";
+        go(s, n, 0, preans);
+        cout << res << "\n";
     }
 }
 
-signed main() {
+int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);

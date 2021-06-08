@@ -23,8 +23,9 @@ int main() {
     cin.tie(NULL);
     
     // vector<int> v = {1,2,3}; int sum = 4; // 4
-    vector<int> v = {2,5,3,6}; int sum = 10; // 5
+    // vector<int> v = {2,5,3,6}; int sum = 10; // 5
     // vector<int> v = {1,2,3}; int sum = 5; // 5
+    vector<int> v = {2,3,5}; int sum = 9;
     int n = v.size();
     dp.assign(n+1, vector<int> (sum+1, -1));
     cout << coinchange(v, sum, n) << "\n";

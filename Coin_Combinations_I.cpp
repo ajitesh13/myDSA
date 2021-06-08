@@ -43,21 +43,40 @@ int string_to_int(string s) {
     return x;
 }
 
+int mod = 1000000007;
+vector<int> fact(100);
+void func() {
+    fact[0] = 1;
+    fact[1] = 1;
+    for (int i=1; i<=100; i++) {
+        fact[i] = ((i%mod)*(fact[i-1]%mod))%mod;
+    }
+}
+
+int go(vector<int>& v, int index, int sum, string coin) {
+    cout << sum << " " << index << " " << coin << "\n";
+    if (sum == 0) {
+        
+    }
+    else if (index == -1) return 0;
+    else {
+        if (v[index] <= sum) {
+            return go(v, index, sum-v[index] ,coin+to_string(v[index])) + go(v, index-1, sum,  coin);
+        } else return go(v, index-1, sum, coin);
+    }
+}
 void best() {
     int __ = 1;
-    cin >> __;
+    // cin >> __;
     while(__--) {
-        int n;
-        cin >> n;
+        int n, sum;
+        cin >> n >> sum;
         vector<int> v(n);
-        map<int,int> mp;
         for (int i=0; i<n; i++) {
             cin >> v[i];
-            mp[v[i]]++;
         }
-        // contp(z,mp);
-        int it = mp.begin()->second;
-        cout << n - it << "\n"; 
+        func();
+        cout << go(v, n-1, sum, "") << "\n";
     }
 }
 

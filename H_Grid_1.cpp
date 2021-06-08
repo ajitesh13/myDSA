@@ -43,29 +43,49 @@ int string_to_int(string s) {
     return x;
 }
 
+int mod = 1000000007;
 void best() {
     int __ = 1;
-    cin >> __;
+    // cin >> __;
     while(__--) {
-        int n;
-        cin >> n;
-        vector<int> v(n);
-        int neg = 0, pos = 0, zero = 0;
+        int n, m;
+        cin >> n >> m;
+        vector<vector<int>> v;
         for (int i=0; i<n; i++) {
-            cin >> v[i];
-            if (v[i] > 0) pos++;
-            else if (v[i] < 0) neg++;
-            else zero++;
-        }
-        if (pos > 0) {
-            if (zero > 0) {
-                cout << neg + 2 << "\n";    
-            } else {
-                cout << neg + 1 << "\n";
+            vector<int> te;
+            for (int j=0; j<m; j++) {
+                char ch;
+                cin >> ch;
+                if (ch == '.') te.pb(0);
+                else te.pb(1);
             }
-        } else {
-            cout << neg + zero << "\n";
+            v.pb(te);
         }
+        vector<vector<int>> dp(n, vector<int> (m, 0));
+        dp[0][0] = 1;
+        for (int i=1; i<n; i++) {
+            if (v[i][0] != 1) {
+                if (dp[i-1][0] == 1) dp[i][0] = 1;
+            }
+        }
+        for (int j=1; j<m; j++) {
+            if (v[0][j] != 1) {
+                if (dp[0][j-1] == 1) dp[0][j] = 1;
+            }
+        }
+        // printvvec(dp);
+        for (int i=1; i<n; i++) {
+            for (int j=1; j<m; j++) {
+                if (v[i][j] != 1) {
+                    int t1 = 0, t2 = 0;
+                    if (v[i-1][j] != 1) t1 = dp[i-1][j];
+                    if (v[i][j-1] != 1) t2 = dp[i][j-1];
+                    dp[i][j] = (t1%mod + t2%mod)%mod;
+                }
+            }
+        }
+        // printvvec(dp);
+        cout << dp[n-1][m-1] << "\n";
     }
 }
 
