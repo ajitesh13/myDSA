@@ -1,11 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool samechar(string a, string b) {
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    return a == b;
+}
+
 bool solve(string a, string b) {
     if (a.length() != b.length()) return false;
     if (a.empty() and b.empty()) return true;
     if (a == b) return true;
     if (a.length() <= 1) return false;
+    if (!samechar(a, b)) return false;
 
     int n = a.length();
     bool flag = false;

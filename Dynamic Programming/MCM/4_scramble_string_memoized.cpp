@@ -14,6 +14,8 @@ bool solve(string a, string b) {
         if (a.empty() and b.empty()) return true;
         if (a == b) return true;
         if (a.length() <= 1) return false;
+        // if both the string contain different character 
+
         bool flag = false;
         int n = a.length();
         for (int i=1; i<=n-1; i++) {
@@ -41,8 +43,11 @@ int main() {
     // string a = "coder";
     // string b = "ocder"; // 1
 
-    string a = "abcde";
-    string b = "caebd"; // 0
+    // string a = "abcde";
+    // string b = "caebd"; // 0
+
+    string a = "ab";
+    string b = "ba";
 
     cout << solve(a, b) << "\n";
     
