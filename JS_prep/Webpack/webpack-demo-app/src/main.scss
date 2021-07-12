@@ -1,0 +1,10 @@
+$primary: blue;
+$danger: purple;
+$bgcolor: green;
+
+body {
+    background-color: $bgcolor;
+}
+
+@import '~bootstrap/scss/bootstrap';
+
