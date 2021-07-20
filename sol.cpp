@@ -1,34 +1,67 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int go(int x1, int ans) {
-    long long int t = 1;
-    int x2 = 0;
-    vector<int> v(32, 0);
-    for (int i=0; i<32; i++) {
-        cout << (x1&t) << " " << (ans&t) << "\n";
-        if ((x1&t) == 0 and (ans&t) != 0) {
-            v[i] = 1;
-        } else if ((x1&t) != 0 and (ans&t) == 0) {
-            v[i] = 1;
-        }
-        t <<= 1;
+#define ll long long int
+#define pb push_back
+#define mp make_pair
+#define mt make_tuple
+#define pp pop_back
+#define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
+#define cont(it,x) for (auto it=x.begin(); it!=x.end(); it++){cout << *it << ' ';} cout << '\n';
+#define contp(it,x) for (auto it=x.begin(); it!=x.end(); it++){cout << it->first << ' ' << it->second << '\n';}
+#define printvvec(x) for(int _=0;_<x.size();_++){for(int __=0;__<x[_].size(); __++){cout<<x[_][__]<<' ';}cout<<'\n';}
+#define printp(x) cout<<x.first<<' '<< x.second<<'\n';
+#define fo(i,start,end) int i=start;i<end;i++
+#define foi(i,start,end) int i=start;i<=end;i++
+#define fot(it, x) auto it=x.begin();it!=x.end();it++
+#define printadj(n,x) for (int i=0; i<n; i++) {cout<<i<<": ";for(int j=0;j<x[i].size();j++){cout<<adj[i][j]<<' ';}cout<<'\n';}
+//#define int long long int
+#define fo(i,start,end) int i=start;i<end;i++
+#define foi(i,start,end) int i=start;i<=end;i++
+#define fot(it, x) auto it=x.begin();it!=x.end();it++
+#define invec(v, n) for(int i=0;i<v.size();i++)cin>>v[i];
+
+// min-heap
+class comp{
+public:
+    bool operator() (int& a, int& b) {
+        return a > b;
     }
-    for (int i=0; i<32; i++) {
-        if (v[i] == 1) {
-            x2 += pow(2, i);
-        }
+};
+
+// sort pair
+bool comp1(pair<int,int> a, pair<int,int> b) {
+    return(a.second < b.second);
+}
+
+// string to int
+int string_to_int(string s) {
+    stringstream a(s);
+    int x;
+    a >> x;
+    return x;
+}
+
+void best() {
+    int __ = 1;
+    cin >> __;
+    while(__--) {
+        
     }
-    return x2;
 }
 
 int main() {
-
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
     
-    cout << go(0,2) << "\n";
+    #ifndef ONLINE_JUDGE
+        //freopen("in", "r", stdin);
+        //freopen("out", "w", stdout);
+    #endif
+    
+    best();
     
     return 0;
 }
