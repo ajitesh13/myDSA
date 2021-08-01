@@ -8,9 +8,10 @@ vector<int> msize;
 int node_find(int x) {
     if (x == parent[x]) {
         return x;
-    } else {
-        return node_find(parent[x]);
     }
+    int temp = node_find(parent[x]);
+    parent[x] = temp;
+    return temp;
 }
 
 void node_union(int x, int y) {
