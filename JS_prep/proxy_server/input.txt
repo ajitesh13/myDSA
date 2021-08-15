@@ -1,0 +1,17 @@
+6
+m1 m2 m3 m4 m5 m6
+2
+panda
+3
+m1 m2 m3
+sahu
+3
+m4 m5 m6
+7
+panda/helloqorld
+panda/machine_down=m1
+panda/hello
+panda/hiosvbovufsos
+sahu/vsfvsfbs
+sahu/vrrrrrrrrr
+panda/qqwweew
