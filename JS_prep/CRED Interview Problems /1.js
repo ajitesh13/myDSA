@@ -6,8 +6,6 @@ const getMatrics = applySpec({
   sub: (a, b) => a - b,
 });
 
-// console.log(getMatrics(2, 4)); // => { sum: 6, nested: { mul: 8} }
-
 function applySpec(obj) {
   let obj1 = {};
   obj1["sum"] = obj.sum;
