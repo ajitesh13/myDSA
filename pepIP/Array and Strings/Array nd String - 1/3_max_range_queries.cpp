@@ -16,6 +16,11 @@ double tick() {
 }
 
 void solve() {
+
+    #ifndef ONLINE_JUDGE
+        freopen("in", "r", stdin);
+    #endif
+
     int t;
     cin >> t;
     // int google_contest_count = 0;

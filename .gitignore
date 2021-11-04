@@ -3,3 +3,5 @@
 CP PlayGround/.cph
 CP PlayGround/.vscode
 node_modules
+*.class
+a.out
