@@ -1,0 +1,25 @@
+Questions:
+
+
+1. What does the team work on and how does it impact customers?
+
+
+2. What is the tech stack primarily used by the team? What technologies are different team members working on?
+events, bloom, apache beam, dataflow, spar, data pipelines, tensorflow gnn, sql plx, 
+
+
+3. How do you measure the individual impact among the team members?
+
+
+4. What do you envision for team within the next one year?
+
+
+5. What is the team structure, how big and distributed is it? - megamind, 10 meber
+
+
+6. What is the reporting structure and how does it connect to rest of the Google Maps & Google.
+
+
+Google Geo - weed out abusive content from Maps
+User understanding
+Graph nn - electra
