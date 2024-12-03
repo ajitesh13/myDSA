@@ -1,0 +1,27 @@
+# Write a function to convert between two currencies using limited conversion options.
+
+# Calculate the total conversion rate by finding the product of all required intermediate conversions.
+
+# If multiple rates are available for the target currency, any one can be returned.
+
+# The program should be able to handle any possible combination of given currencies.
+# If there is no way to convert between two currencies, return -1.
+
+# In the first part we were trying to find any path between two currencies.
+# However, different paths can result in different exchange rates.
+
+# Now we are interested in finding the best exchange rate possible.
+# That is, if we are changing currency A into currency B, we want the highest number of currency "B" for each "A" given.
+
+# As an example, if we go from A → B directly, we might convert at a ratio of 1.2.
+# However, if we go from A → C → B, we can convert at a ratio of 1.3.
+
+# For this question, we can assume that we can never make money converting a currency to itself.
+#  a -> b 1.3 
+#  a -> c 1.5
+#  c -> b 1.6
+
+#  a -> {b,1.3} {c,1.5}
+#  c ->{b,1.6}
+
+
