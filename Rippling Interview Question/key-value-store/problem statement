@@ -1,0 +1,53 @@
+ Part 1.
+ Design and implement an in-memory key value datastore. This datastore should be able to support some basic operations such as 
+ Get, Set and Delete for string keys and values.
+
+ I would like to see test cases as well as implementation code.
+
+# You can assume that the input operations are always valid, but the key to operate on may be non-existent. We won’t worry about 
+ concurrent access to the database. You can handle errors however you think is best.
+
+ Let’s start with the data structure of this key value store. Implement methods for Get, Set and Delete.
+
+ Example. 
+ Database DB;
+ DB.set("key1", "val1");
+ cout << DB.get("key1") << endl; // val1
+ DB.deleteKey("key1");
+
+ Part 2. 
+ Add support for transactions - Begin, Commit and Rollback.
+
+ A transaction is created with the Begin command and creates a context for the other operations to happen. 
+ Until the active transaction is committed using the Commit command, those operations do not persist. 
+ And, the Rollback command throws away any changes made by those operations in the context of the active transaction.
+
+ Commit() and Rollback() will only happen when inside a transaction.
+
+ Note: We won’t worry about concurrency for this part of the question.
+
+ The following examples demonstrate how this might work:
+
+ Example 1.
+ * Set key0 to val0
+ * Get key0
+   * Expect val0
+ * Begin transaction
+ * Within transaction: Get key0
+   * Expect val0
+ * Within transaction: Set key1 to val1
+ * Within transaction: Get key1
+   * Expect val1
+ * Commit transaction
+ * From the global state: Get key1
+   * Expect val1
+  
+ Example 2.
+ * Begin transaction
+ * Set key2 to val2
+ * Get key2
+   * Expect val2
+ * Rollback
+ * Get key2
+   * Expect an error case as key2 is not set
+ */

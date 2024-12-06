@@ -1,24 +1,54 @@
-from collections import deque, defaultdict
 
-def currencyConversion(currencies, source_currency, target_currency):
-    adj = defaultdict(set)
-    for currency1, currency2, conversion_rate in currencies:
-        adj[currency1].add((currency2, conversion_rate))
+
+class Spreadsheet:
+    def __init__(self):
+        self.mapper = {}
     
-    res = -float('inf')
-    deq = deque([(source_currency, 1)])
-    visited = set(source_currency)
-    while deq:
-        curr_currency, curr_rate = deq.popleft()
-        if curr_currency == target_currency:
-            return curr_rate
-        for node, node_rate in adj[curr_currency]:
-            if node not in visited:
-                visited.add(node)
-                deq.append((node, curr_rate * node_rate))
+    def set(self, key, value):
+        if value == "":
+            if key in self.mapper:
+                del self.mapper[key]
+            return
+        self.mapper[key] = value
+    
+    def get(self):
+        result = []
+        for key, raw_val in self.mapper.items():
+            computed_val = self.evaluate(key)
+            result.append((key, raw_val, computed_val))
+        
+        return result
+    
+    def evaluate(self, key):
+        if key not in self.mapper:
+            return 0
 
-    return -1
+        value = self.mapper[key]
+        if not value.startswith('='):
+            return int(value)
+        
+        value = value[1:]
+        num1, num2 = value.split("+")
 
-currencies = [['a', 'b', 1.3], ['a', 'c', 1.5], ['c', 'b', 1.6]]
-result = currencyConversion(currencies, 'b', 'c')
-print(result)
+        def get_value(token):
+            return int(token) if token.isdigit() else self.evaluate(token)
+        
+        return get_value(num1) + get_value(num2)
+
+sheet = Spreadsheet()
+sheet.set("A1", "5")
+sheet.set("B1", "=20+1")
+sheet.set("A1", "-9")
+sheet.set("A3", "")
+sheet.set("A3", "1")
+sheet.set("A3", "")
+sheet.set("A3", "=A1+B1")
+sheet.set("A4", "=A3+B1")
+sheet.set("A5", "=A3+A4")
+sheet.set("A1", "4")
+sheet.set("A6", "=42+A1")
+results = sheet.get()
+for result in results:
+    print(result)
+
+            
