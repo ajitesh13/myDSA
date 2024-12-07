@@ -24,3 +24,36 @@
 # */
 
 # // set(string key, string s)
+
+
+// Design and implement an Excel Spreadsheet.
+// You are building a library that a frontend team may use to surface a spreadsheet to some users.
+// We want this to be a MVP library that can be expanded in the future if necessary.
+// All data can be stored in memory.
+
+// We have the following requirements:
+
+// We need to support integer values and formula values for the plus operator.
+
+// For example, cell values may be:
+
+// * -9, 2, 3, 100, etc. (maximum of 3 digits per integer)
+// * =2+8, =100+2, etc. (with exactly two integers)
+
+// We need to be able to reset cells to their default value, by giving the empty string.
+
+// We need to be able to view the spreadsheet, with both the raw and computed values shown.
+// For example, for “=2+8”, the raw value is “=2+8” and the computed value is “10”.
+// This does not have to look like a real spreadsheet, as long as the values are clear when printed.
+// Create a print method to print the whole spreadsheet.
+
+// The team will later focus on reference values, such as “=A1+B2”.
+
+// yourMethod("A1", "5")
+// yourMethod("A2", "=7+2")
+
+// yourPrintMethod()
+
+// A1, 5
+// A2, 9, =7+2
+ // Unordered_map<Stirng, Cell>

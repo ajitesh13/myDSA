@@ -1,81 +1,50 @@
-from collections import defaultdict, deque
-
-class MusicPlayer:
+class Spreadsheet:
 
     def __init__(self):
-        self.next_music_id = 1
-        self.music_library = {}
-        self.song_user_map = defaultdict(set)
-        self.user_song_map = defaultdict(deque)
+        self.map = {}
+        self.cache = {}
 
-    def add_song(self, song_title):
-        if song_title in self.music_library:
-            return "Error: Music already in library"
-
-        self.music_library[self.next_music_id] = song_title
-        self.next_music_id += 1
+    def set(self, key, value):
+        if value == "":
+            if key in self.map:
+                del self.map[key]
         
-        return self.next_music_id
+        self.map[key] = value
     
-    def play_song(self, song_id, user_id):
-        if song_id not in self.music_library:
-            return "Error: Music not added"
-        
-        self.song_user_map[song_id].add(user_id)
+    def print_sheet(self):
 
-        if user_id not in self.user_song_map:
-            self.user_song_map[user_id] = deque(maxlen=3)
-        
-        if song_id in self.user_song_map[user_id]:
-            self.user_song_map[user_id].remove(song_id)
-        self.user_song_map[user_id].appendleft(song_id)
-        
-        
-    def print_analytics_summary(self):
-        res = []
-
-        for song_id, users in self.song_user_map.items():
-            res.append((len(users), self.music_library[song_id]))
-        
-        res.sort(reverse=True)
-
-        return res
+        for key, raw_value in self.map.items():
+            value = self.evaluate(key)
+            print(f"{key}: {raw_value} ${value}")
     
-    def last_three_played_song_title(self, user_id):
-        if user_id not in self.user_song_map:
-            return "Error: User not found"
+    def evaluate(self, key):
+
+        if key not in self.map:
+            return 0
+
+        if key in self.cache:
+            return self.cache[key]
         
-        res = []
-        for song in self.user_song_map[user_id]:
-            res.append(self.music_library[song])
+        value = self.map[key]
+        if value[0] != "=":
+            self.cache[key] = int(value)
+            return self.cache[key]
         
-        return res
+        value = value[1:]   
+        num1, num2 = value.split('+')
 
-    
-music_player = MusicPlayer()
-music_player.add_song("ABC")
-music_player.add_song("BCD")
-music_player.add_song("EDG")
-music_player.add_song("UIO")
-music_player.add_song("JJY")
-music_player.add_song("MKL")
-music_player.add_song("ZYZ")
+        def get_value(token):
+            return int(token) if token.isdigit() else self.evaluate(token)
 
-music_player.play_song(1, 1)
-music_player.play_song(1, 2)
-music_player.play_song(1, 3)
-music_player.play_song(2, 2)
-music_player.play_song(1, 3)
-music_player.play_song(4, 4)
-music_player.play_song(3, 3)
-music_player.play_song(5, 5)
-music_player.play_song(6, 5)
-music_player.play_song(7, 5)
-music_player.play_song(7, 7)
-music_player.play_song(3, 2)
+        self.cache[key] = get_value(num1) + get_value(num2)
+        return self.cache[key]
 
-analytics_report = music_player.print_analytics_summary()
-print(analytics_report)
+sheet = Spreadsheet()
+sheet.set("A1", '=8+2')
+sheet.set("A2", '=3+4')
+sheet.set("A3", '=11+8')
+sheet.set("A4", '=A1+9')
+sheet.set("A5", '=A3+A4')
 
-recently_played_music = music_player.last_three_played_song_title(2)
-print(recently_played_music)
+sheet.print_sheet()
+
