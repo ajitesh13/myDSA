@@ -53,7 +53,7 @@ class Database:
             return "TransactionError: No active trasaction"
         
         self.temp_db.clear()
-        slef.in_transaction = False
+        self.in_transaction = False
 
 db = Database()
 assert db.get("key0") == "KeyError: Key not Found", "Test case Failed"
