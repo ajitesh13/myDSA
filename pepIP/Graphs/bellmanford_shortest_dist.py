@@ -1,36 +1,17 @@
-def bellman_ford(graph, source):
-    # Step 1: Initialize distances from source to all vertices as infinite
-    distance = {vertex: float('inf') for vertex in graph}
-    distance[source] = 0  # Distance to the source is 0
+edges = [[1,2,2],[1,3,1],[2,4,1],[3,7,1],[4,5,5],[4,6,2],[7,6,3],[5,9,3],[6,8,7],[7,10,8],[9,11,2],[8,11,3],[10,11,2]]
+n = 11
 
-    # Step 2: Relax all edges |V| - 1 times
-    for _ in range(len(graph) - 1):
-        for u in graph:
-            for v, weight in graph[u]:
-                if distance[u] != float('inf') and distance[u] + weight < distance[v]:
-                    distance[v] = distance[u] + weight
+dist = [float('inf') for _ in range(n + 1)] 
 
-    # Step 3: Check for negative weight cycles
-    for u in graph:
-        for v, weight in graph[u]:
-            if distance[u] != float('inf') and distance[u] + weight < distance[v]:
-                print("Graph contains negative weight cycle")
-                return None  # or raise an exception
+dist[1] = 0
+for _ in range(n - 1):
+    for u, v, wt in edges:
+        if dist[u] != float('inf') and dist[u] + wt < dist[v]:
+            dist[v] = dist[u] + wt
 
-    return distance
+for u, v, wt in edges:
+    if dist[u] != float('inf') and dist[u] + wt < dist[v]:
+        print("Graph contains negative edge")
+        break
 
-# Example usage:
-graph = {
-    'A': [('B', 1), ('C', 4)],
-    'B': [('C', -3), ('D', 2)],
-    'C': [('D', 3)],
-    'D': []
-}
-
-source_vertex = 'A'
-distances = bellman_ford(graph, source_vertex)
-
-if distances:
-    print("Vertex Distance from Source:")
-    for vertex, dist in distances.items():
-        print(f"{vertex}: {dist}")
+print(dist[1:])
