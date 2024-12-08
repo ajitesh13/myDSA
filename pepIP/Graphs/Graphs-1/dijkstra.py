@@ -1,41 +1,25 @@
+from collections import defaultdict
 import heapq
 
-def dijkstra(graph, source):
-    # Step 1: Initialize distances and priority queue
-    distance = {vertex: float('inf') for vertex in graph}
-    distance[source] = 0
-    priority_queue = [(0, source)]  # (distance, vertex)
+edges = [[1,2,2],[1,3,1],[2,4,1],[3,7,1],[4,5,5],[4,6,2],[7,6,3],[5,9,3],[6,8,7],[7,10,8],[9,11,2],[8,11,3],[10,11,2]]
+adj = defaultdict(list)
+for u, v, wt in edges:
+    adj[u].append((v, wt))
 
-    while priority_queue:
-        # Step 2: Get the vertex with the smallest distance
-        current_distance, current_vertex = heapq.heappop(priority_queue)
+n = 11
 
-        # Step 3: If the distance is greater than the recorded distance, skip it
-        if current_distance > distance[current_vertex]:
-            continue
+dist = [float('inf') for _ in range(n + 1)] 
+source = 1
+dist[source] = 0
+minHeap = [(0, source)]
 
-        # Step 4: Relax all adjacent edges
-        for neighbor, weight in graph[current_vertex]:
-            distance_through_vertex = current_distance + weight
+while minHeap:
+    curr_dist, u = heapq.heappop(minHeap)
 
-            # If a shorter path to the neighbor is found
-            if distance_through_vertex < distance[neighbor]:
-                distance[neighbor] = distance_through_vertex
-                heapq.heappush(priority_queue, (distance_through_vertex, neighbor))
+    if curr_dist <= dist[u]:
+        for v, wt in adj[u]:
+            if dist[u] + wt < dist[v]:
+                dist[v] = dist[u] + wt
+                heapq.heappush(minHeap, (dist[v], v)) 
 
-    return distance
-
-# Example usage:
-graph = {
-    'A': [('B', 1), ('C', 4)],
-    'B': [('C', 2), ('D', 5)],
-    'C': [('D', 1)],
-    'D': []
-}
-
-source_vertex = 'A'
-distances = dijkstra(graph, source_vertex)
-
-print("Vertex Distance from Source:")
-for vertex, dist in distances.items():
-    print(f"{vertex}: {dist}")
+print(dist)
