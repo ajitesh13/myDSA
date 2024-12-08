@@ -1,25 +1,20 @@
-from collections import defaultdict
-import heapq
+edges = [[1,2,1],[1,4,1],[1,5,3],[2,3,1],[4,3,2],[3,5,1]]
 
-edges = [[1,2,2],[1,3,1],[2,4,1],[3,7,1],[4,5,5],[4,6,2],[7,6,3],[5,9,3],[6,8,7],[7,10,8],[9,11,2],[8,11,3],[10,11,2]]
-adj = defaultdict(list)
+n = 5
+dist = [[float('inf') for i in range(n + 1)] for j in range(n + 1)]
+
 for u, v, wt in edges:
-    adj[u].append((v, wt))
+    dist[u][v] = wt
 
-n = 11
+for k in range(n):
+    for i in range(n + 1):
+        for j in range(n + 1):
+            if i == j:
+                dist[i][j] = 0
+            
+            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
 
-dist = [float('inf') for _ in range(n + 1)] 
-source = 1
-dist[source] = 0
-minHeap = [(0, source)]
-
-while minHeap:
-    curr_dist, u = heapq.heappop(minHeap)
-
-    if curr_dist <= dist[u]:
-        for v, wt in adj[u]:
-            if dist[u] + wt < dist[v]:
-                dist[v] = dist[u] + wt
-                heapq.heappush(minHeap, (dist[v], v)) 
-
-print(dist)
+for i in range(n + 1):
+    for j in range(n + 1):
+        if dist[i][j] != float('inf'):
+            print(f"{i},{j}:{dist[i][j]}")
