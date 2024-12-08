@@ -1,20 +1,40 @@
-edges = [[1,2,1],[1,4,1],[1,5,3],[2,3,1],[4,3,2],[3,5,1]]
+from collections import defaultdict, deque
 
-n = 5
-dist = [[float('inf') for i in range(n + 1)] for j in range(n + 1)]
+edges  = [
+    ("USD", "EUR", "0.95"),
+    ("EUR", "JPY", "137"),
+    ("USD", "JPY", "130"),
+    ("JPY", "BTC", "0.001"),
+    ("BTC", "INR", "30000"),
+]
 
+adj = defaultdict(set)
 for u, v, wt in edges:
-    dist[u][v] = wt
+    adj[u].add((v, wt))
+    adj[v].add((u, 1 / wt))
 
-for k in range(n):
-    for i in range(n + 1):
-        for j in range(n + 1):
-            if i == j:
-                dist[i][j] = 0
-            
-            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+def bfs(adj, source, destination):
 
-for i in range(n + 1):
-    for j in range(n + 1):
-        if dist[i][j] != float('inf'):
-            print(f"{i},{j}:{dist[i][j]}")
+    if source not in adj or destination not in adj:
+        print("CurrencyError: Trying to convert to an invalid currency")
+        return
+
+    deq = deque([(source, 1)])
+    while deq:
+        curr_node, curr_rate = deq.popleft()
+        if curr_node == destination:
+            return curr_rate
+        
+        for neighbor, rate in adj[curr_node]:
+            deq.append((neighbor, rate * curr_rate))
+    
+    return -1
+
+
+print(dfs_best_rate_wrapper(graph, "USD", "JPY"))  
+print(dfs_best_rate_wrapper(graph, "BTC", "INR"))  
+print(dfs_best_rate_wrapper(graph, "USD", "INR")) 
+print(dfs_best_rate_wrapper(graph, "CNY", "USD")) 
+        
+
+
