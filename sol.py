@@ -1,40 +1,36 @@
-from collections import defaultdict, deque
+class Solution:
+    def manhattan_distance(self, point1, point2):
+        return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1])
 
-edges  = [
-    ("USD", "EUR", "0.95"),
-    ("EUR", "JPY", "137"),
-    ("USD", "JPY", "130"),
-    ("JPY", "BTC", "0.001"),
-    ("BTC", "INR", "30000"),
-]
+    def minCostConnectPoints(self, points: List[List[int]]) -> int:
 
-adj = defaultdict(set)
-for u, v, wt in edges:
-    adj[u].add((v, wt))
-    adj[v].add((u, 1 / wt))
-
-def bfs(adj, source, destination):
-
-    if source not in adj or destination not in adj:
-        print("CurrencyError: Trying to convert to an invalid currency")
-        return
-
-    deq = deque([(source, 1)])
-    while deq:
-        curr_node, curr_rate = deq.popleft()
-        if curr_node == destination:
-            return curr_rate
+        n = len(points)
+        adj = defaultdict(set)
+        for i in range(n):
+            for j in range(n):
+                if i != j:
+                    xi, yi = points[i][0], points[i][1]
+                    xj, yj = points[j][0], points[j][1]
+                    point1, point2 = (xi, yi), (xj, yj)
+                    manhat_dist = self.manhattan_distance(point1, point2)
+                    adj[point1].add((point2, manhat_dist))
+                    adj[point2].add((point1, manhat_dist))
         
-        for neighbor, rate in adj[curr_node]:
-            deq.append((neighbor, rate * curr_rate))
-    
-    return -1
-
-
-print(dfs_best_rate_wrapper(graph, "USD", "JPY"))  
-print(dfs_best_rate_wrapper(graph, "BTC", "INR"))  
-print(dfs_best_rate_wrapper(graph, "USD", "INR")) 
-print(dfs_best_rate_wrapper(graph, "CNY", "USD")) 
+        minHeap = [(0, (points[0][0], points[0][1]))]
+        visited = set((points[0][0], points[0][1]))
+        total_wt = 0
+        while len(visited) < n:
+            curr_wt, curr_node  = heapq.heappop(minHeap)
+            total_wt += curr_wt 
+            
+            for node, wt in adj[curr_node]:
+                if node not in visited:
+                    visited.add(node)
+                    heapq.heappush(minHeap, (wt, node))
         
+        return total_wt
+
+                    
 
 
+        
