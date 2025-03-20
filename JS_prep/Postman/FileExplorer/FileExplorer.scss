@@ -1,0 +1,72 @@
+.finder {
+  width: 350px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 12px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+
+  .finder-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    button {
+      border: none;
+      background: #ddd;
+      padding: 6px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background 0.2s;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      &:hover:not(:disabled) {
+        background: #bbb;
+      }
+    }
+  }
+
+  .finder-content {
+    .finder-path {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .finder-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .finder-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px;
+        border-radius: 3px;
+        cursor: pointer;
+        background: #fff;
+        border: 1px solid #ddd;
+        transition: background 0.2s;
+
+        &:hover {
+          background: #eee;
+        }
+
+        &.folder {
+          font-weight: bold;
+          color: #0056b3;
+        }
+
+        &.file {
+          font-style: italic;
+          color: #333;
+        }
+      }
+    }
+  }
+}
