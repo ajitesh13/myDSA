@@ -5,9 +5,6 @@ require("dotenv").config();
 
 const app = express();
 
-// .env file
-// MONGODB_URI=mongodb+srv://b118008:PzKkLsZpdXG2k87b@cluster0.l0xba.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-
 // Middleware
 app.use(express.json());
 
@@ -23,12 +20,12 @@ mongoose
 
 // Basic route for testing
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to MongoDB Atlas API" });
+  res.json({ message: "Welcome to nodeJS Server" });
 });
 
 // CRUD Routes
 // Create User
-app.post("/api/users", async (req, res) => {
+app.post("/api/create_users", async (req, res) => {
   try {
     const user = new User(req.body);
     const savedUser = await user.save();
