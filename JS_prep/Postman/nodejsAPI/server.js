@@ -5,6 +5,9 @@ require("dotenv").config();
 
 const app = express();
 
+// .env file
+// MONGODB_URI=mongodb+srv://b118008:PzKkLsZpdXG2k87b@cluster0.l0xba.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
 // Middleware
 app.use(express.json());
 
