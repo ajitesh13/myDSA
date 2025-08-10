@@ -5,3 +5,4 @@ CP PlayGround/.vscode
 node_modules
 *.class
 a.out
+.DS_Store

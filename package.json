@@ -1,0 +1,23 @@
+{
+  "name": "mydsa",
+  "version": "1.0.0",
+  "description": "This Repo contains everything i am doing for Competitve Programming and Interview Preparations",
+  "main": "sol.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajitesh13/myDSA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajitesh13/myDSA/issues"
+  },
+  "homepage": "https://github.com/ajitesh13/myDSA#readme",
+  "dependencies": {
+    "@datastructures-js/priority-queue": "^6.3.2"
+  }
+}
